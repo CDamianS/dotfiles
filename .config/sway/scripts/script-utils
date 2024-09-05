@@ -1,0 +1,21 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+my $directory = '/home/damian/.config/sway/scripts/utils/';
+
+opendir(my $dh, $directory) or die "Cannot open directory: $!";
+my @scripts = grep { -f "$directory/$_" } readdir($dh);
+closedir($dh);
+
+@scripts = sort @scripts;
+
+my $script_list = join("\n", @scripts);
+
+my $selected_script = `echo "$script_list" | bemenu -l 5 -p "Script: "`;
+
+if ($selected_script) {
+    my $script_path = "$directory/$selected_script";
+    system("perl $script_path");
+}

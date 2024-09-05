@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+MOVIE_DIR="$HOME/Movies"
+MOVIE=$(ls "$MOVIE_DIR" | bemenu -l 10)
+
+if [ -n "$MOVIE" ]; then
+    mpv "$MOVIE_DIR/$MOVIE"
+fi

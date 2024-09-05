@@ -1,0 +1,97 @@
+@import "./mocha.css";
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "Arimo Nerd Font";
+    font-size: 15px;
+    font-weight: bold;
+}
+
+window#waybar {
+    background-color: @base;
+    color: @foreground;
+}
+
+#window {
+    /* margin: 2px 0; */
+    background: @background;
+    padding: 0 10px;
+}
+
+#mode {
+    /* margin: 2px 0; */
+    padding: 0 10px;
+    margin-left: 0;
+    background: @background;
+}
+
+#workspaces button {
+    min-width: 20px;
+    /* border-radius: 5px; */
+    /* margin: 6px 2px; */
+    padding: 2px 2px;
+    color: @blue;
+}
+
+#workspaces button.focused {
+    background-color: @blue;
+    color: @base;
+}
+
+#workspaces button.urgent {
+    color: @red;
+}
+
+#workspaces button:hover {
+    background: @teal;
+    color: @background;
+}
+
+#pulseaudio,
+#disk,
+#backlight,
+#battery,
+#network,
+#custom-playerctl {
+    color: @foreground;
+    margin: 0px 4px;
+    padding: 2px 5px;
+    /* border-radius: 5px; */
+}
+
+/* Latte theme */
+/* #clock { */
+/*     color: @background; */
+/*     background-color: @blue; */
+/*     margin-left: 4px; */
+/*     padding: 2px 5px; */
+/* } */
+
+/* #backlight { */
+/*     background-color: @magenta; */
+/* } */
+
+/* #pulseaudio { */
+/*     background-color: @red; */
+/* } */
+
+/* #battery { */
+/*     background-color: @yellow; */
+/* } */
+
+/* #network { */
+/*     background-color: @green; */
+/* } */
+
+/* #memory { */
+/*     background-color: @violet; */
+/* } */
+
+/* #custom-playerctl { */
+/*     background-color: @teal; */
+/* } */
+
+/* #workspaces { */
+/*     background-color: @base; */
+/*     /\* border-radius: 5px; *\/ */
+/* } */

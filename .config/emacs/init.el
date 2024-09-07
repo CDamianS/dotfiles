@@ -10,7 +10,7 @@
  '(custom-safe-themes
    '("a690924a4483c8b8e42d62bc3f62d65d9e3cb40444de0f8c6ebfbca28baad579" default))
  '(package-selected-packages
-   '(cheat-sh plz persp-mode-project-bridge persp-mode exec-path-from-shell gruvbox-theme raku-mode markdown-mode org-roam-ui org-roam org-super-agenda org-modern olivetti yasnippet-snippets which-key web-mode treesit-auto toggle-term toc-org sudo-edit sqlite-mode-extras sly restclient rainbow-mode rainbow-delimiters pyvenv php-mode pdf-tools org-bullets org-auto-tangle moonscript marginalia magit lua-mode ligature jtsx impatient-mode god-mode emojify emmet-mode elfeed-org elfeed-goodies ein eat doom-modeline dirvish dashboard corfu clojure-mode catppuccin-theme apheleia all-the-icons-dired all-the-icons-completion))
+   '(orderless vertico cheat-sh plz exec-path-from-shell gruvbox-theme raku-mode markdown-mode org-roam-ui org-roam org-super-agenda org-modern olivetti yasnippet-snippets which-key web-mode treesit-auto toggle-term toc-org sudo-edit sqlite-mode-extras sly restclient rainbow-mode rainbow-delimiters pyvenv php-mode pdf-tools org-bullets org-auto-tangle moonscript marginalia magit lua-mode ligature jtsx impatient-mode god-mode emojify emmet-mode elfeed-org elfeed-goodies ein eat doom-modeline dirvish dashboard corfu clojure-mode catppuccin-theme apheleia all-the-icons-dired all-the-icons-completion))
  '(package-vc-selected-packages
    '((one-tab-per-project :vc-backend Git :url "https://github.com/abougouffa/one-tab-per-project")
      (unique-dir-name :vc-backend Git :url "https://github.com/abougouffa/unique-dir-name"))))

@@ -5,7 +5,7 @@
 * Table of contents :toc:
 - [[#priorities][Priorities]]
   - [[#melpa][Melpa]]
-  - [[#fido-mode][Fido mode]]
+  - [[#vertico-mode][Vertico Mode]]
 - [[#general-configs][General Configs]]
   - [[#autopairs][Autopairs]]
   - [[#font-setup][Font Setup]]
@@ -32,7 +32,6 @@
   - [[#modeline][Modeline]]
   - [[#org-mode-1][Org Mode]]
   - [[#pdfs][PDFs]]
-  - [[#persp-mode][Persp-mode]]
   - [[#pyvenv][Pyvenv]]
   - [[#rainbow-mode][Rainbow mode]]
   - [[#restclient][Restclient]]
@@ -55,16 +54,27 @@
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 #+end_src
 
-** Fido mode
+** Vertico Mode
 *** Completion
 #+begin_src emacs-lisp
-(fido-vertical-mode)
-(keymap-set icomplete-minibuffer-map "TAB" 'icomplete-force-complete)
+(use-package vertico
+  :ensure t
+  :init (vertico-mode))
 
 (use-package savehist
   :ensure nil
   :init
   (savehist-mode))
+#+end_src
+
+*** Orderless
+#+begin_src emacs-lisp
+(use-package orderless
+  :ensure t
+  :custom
+  (completion-styles '(orderless basic))
+  (completion-category-defaults nil)
+  (completion-category-overrides '((file (styles partial-completion)))))
 #+end_src
 
 *** Marginalia
@@ -299,7 +309,8 @@ Life in plain text
 #+begin_src emacs-lisp
 (use-package elfeed
   :ensure t
-  :bind ("C-x w" . 'elfeed))
+  :bind ("C-x w" . 'elfeed)
+  :custom (elfeed-db-directory "~/.local/share/elfeed"))
 
 (use-package elfeed-goodies
   :ensure t
@@ -535,27 +546,6 @@ Life in plain text
 ** PDFs
 #+begin_src emacs-lisp
 (use-package pdf-tools :ensure t)
-#+end_src
-
-** Persp-mode
-#+begin_src emacs-lisp
-(use-package persp-mode
-  :ensure t
-  :custom
-  (wg-morph-on nil)
-  (persp-autokill-buffer-on-remove 'kill-weak)
-  :hook (window-setup . (lambda () (persp-mode 1))))
-#+end_src
-
-#+begin_src emacs-lisp
-(use-package persp-mode-project-bridge
-  :ensure t
-  :hook
-  (persp-mode-project-bridge-mode . (lambda ()
-                                      (if persp-mode-project-bridge-mode
-                                          (persp-mode-project-bridge-find-perspectives-for-all-buffers)
-                                        (persp-mode-project-bridge-kill-perspectives))))
-  (persp-mode . persp-mode-project-bridge-mode))
 #+end_src
 
 ** Pyvenv

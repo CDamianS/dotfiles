@@ -2,6 +2,7 @@
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
 export PATH=$CARGO_HOME/bin:$PATH
+export PATH=/usr/local/go/bin:$PATH
 
 # Path to your Oh My Zsh installation.
 export ZSH="$XDG_DATA_HOME/oh-my-zsh"

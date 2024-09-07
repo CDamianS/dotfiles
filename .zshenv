@@ -13,6 +13,7 @@ export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 export PASSWORD_STORE_DIR="$XDG_DATA_HOME/pass"
 export WORKON_HOME="$XDG_DATA_HOME/virtualenvs"
 export BUN_INSTALL="$XDG_DATA_HOME"/bun
+export ROSWELL_HOME="$XDG_DATA_HOME"/roswell
 
 # Bemenu config is dumb
 export BEMENU_OPTS='--fb "#1e1e2e"\

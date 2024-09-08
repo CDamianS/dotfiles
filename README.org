@@ -1,0 +1,205 @@
+#+title: Dotfiles
+#+author: Damian Suarez
+
+* Table of Contents :toc:
+- [[#setup][Setup]]
+- [[#debian-packages][Debian Packages]]
+  - [[#programs][Programs]]
+  - [[#shell][Shell]]
+  - [[#boot][Boot]]
+  - [[#utilities][Utilities]]
+- [[#other-packages][Other packages]]
+  - [[#browser][Browser]]
+  - [[#tessen][Tessen]]
+- [[#services][Services]]
+  - [[#system][System]]
+  - [[#user][User]]
+- [[#customization][Customization]]
+  - [[#browser-1][Browser]]
+  - [[#gtk][GTK]]
+  - [[#fonts][Fonts]]
+- [[#extra-notes][Extra notes]]
+  - [[#adding-user-to-sudo][Adding user to sudo]]
+  - [[#skip-grub-timeout][Skip GRUB timeout]]
+  - [[#networkmanager-unmanaged][NetworkManager unmanaged]]
+  - [[#sddm-hanging-on-poweroff][SDDM Hanging on poweroff]]
+  - [[#compiling-emacs][Compiling Emacs]]
+
+* Setup
+To install the dotfiles 
+#+begin_src bash
+git clone https://github.com/CDamianS/dotfiles ~/.cfg
+cd .cfg
+stow .
+#+end_src
+
+* Debian Packages
+** Programs
+- bemenu
+- cmus
+- dunst
+- foot
+- neovim
+- nmapplet (network-manager-gnome)
+- sway
+- thunar
+- waybar
+- wlogout
+*** Install
+#+begin_src bash
+sudo apt install bemenu cmus dunst foot neovim network-manager-gnome sway thunar waybar wlogout
+#+end_src
+
+** Shell
+- zplug
+- zsh
+- zsh-autosuggestions
+- zsh-syntax-highlighting
+*** Install
+#+begin_src bash
+sudo apt install zplug zsh zsh-autosuggestions zsh-syntax-highlighting
+#+end_src
+
+** Boot
+- Plymouth
+- SDDM
+*** Install
+#+begin_src bash
+sudo apt install sddm --no-install-recommends # Or you'll get the full KDE :o
+sudo apt install plymouth
+#+end_src
+
+** Utilities
+- brightnessctl
+- git
+- nala
+- pamixer
+- pass
+- pulseaudio
+- stow
+- syncthing
+- unzip
+- wget
+- yad
+*** Install
+#+begin_src bash
+sudo apt install brightnessctl git nala pamixer pass pulseaudio stow syncthing unzip wget yad
+#+end_src
+
+* Other packages
+** Browser
+I settled on using [[https://icecatbrowser.org/][GNU icecat]]
+Downloaded with:
+#+begin_src bash
+wget https://icecatbrowser.org/assets/icecat/115.14.0/icecat_115.14esr-1_amd64.deb
+#+end_src
+
+** Tessen
+A nice pass menu
+From:
+#+begin_src bash
+wget https://github.com/ayushnix/tessen/releases/download/v2.2.3/tessen-2.2.3.tar.gz
+#+end_src
+
+* Services
+** System
+- NetworkManager
+- polkit
+
+** User
+- dunst
+- emacs (ofc)
+- pulseaudio
+
+* Customization
+** Browser
+*** Plugins
+Other than the built in
+- Decentraleyes
+- Vimium
+- Ublock
+- Stylus
+- IDCAC
+
+*** Theme 
+
+** GTK
+I use catppuccin mocha
+#+begin_src bash
+wget https://github.com/catppuccin/gtk/releases/download/v1.0.3/catppuccin-latte-blue-standard+default.zip
+#+end_src
+in ~/.local/share/themes/
+
+** Fonts
+I usually use Arimo Nerd Font, JetBrainsMono Nerd Font and FiraCode Nerd Font
+#+begin_src bash
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/Arimo.zip
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/FiraCode.zip
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/JetBrainsMono.zip
+#+end_src
+
+* Extra notes
+Some issues I usually encounter on new installs and how I fixed them
+** Adding user to sudo
+Edit
+#+begin_src bash
+sudo $EDITOR /etc/sudoers
+#+end_src
+and add:
+#+begin_src 
+USERNAME ALL=(ALL:ALL) ALL
+#+end_src
+
+** Skip GRUB timeout
+Edit
+#+begin_src bash
+sudo $EDITOR /etc/sudoers
+#+end_src
+Change/add:
+#+end_src
+#+begin_src conf
+GRUB_DEFAULT=0
+GRUB_TIMEOUT=0
+GRUB_HIDDEN_TIMEOUT=0
+GRUB_CMDLINE_LINUX_DEFAULT="splash quiet"
+GRUB_CMDLINE_LINUX=""    
+#+end_src
+
+** NetworkManager unmanaged
+Change the backend to iwd
+#+begin_src 
+sudo apt install iwd
+#+end_src
+edit:
+#+begin_src bash
+sudo $EDITOR /etc/NetworkManager/conf.d/wifi_backend.conf
+#+end_src
+add:
+#+begin_src conf
+[device]
+wifi.backend=iwd
+#+end_src
+
+** SDDM Hanging on poweroff
+Use
+#+begin_src bash
+sudo $EDITOR /etc/systemd/system.conf
+#+end_src
+and set:
+#+begin_src conf
+#DefaultTimeoutStopSec=90s
+#+end_src
+to:
+#+begin_src conf
+DefaultTimeoutStopSec=5s
+#+end_src
+
+** Compiling Emacs
+Hopefully Debian 13 comes with emacs-pgtk, meanwhile here's a list of the flags I use
+
+*I believe this also needs libsqlite3-0 for sql to work*
+#+begin_src bash
+cd emacs-VERSION
+./configure --with-pgtk --with-native-compilation=aot --with-json --with-tree-sitter --with-modules --with-pop --with-mailutils --with-x-toolkit=no --with-sqlite3=yes
+make
+#+end_src

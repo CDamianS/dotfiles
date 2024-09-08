@@ -65,6 +65,15 @@
   :ensure nil
   :init
   (savehist-mode))
+
+(use-package vertico-directory
+  :after vertico
+  :ensure nil
+  :bind (:map vertico-map
+              ("RET" . vertico-directory-enter)
+              ("DEL" . vertico-directory-delete-char)
+              ("M-DEL" . vertico-directory-delete-word))
+  :hook (rfn-eshadow-update-overlay . vertico-directory-tidy))
 #+end_src
 
 *** Orderless
@@ -618,8 +627,8 @@ Life in plain text
 ** Important files
 *** Config files
 #+begin_src emacs-lisp
-(keymap-global-set "C-c o c" '(lambda () (interactive) (find-file "~/.config/emacs/config.org")))
-(keymap-global-set "C-c o s" '(lambda () (interactive) (find-file "~/.config/sway/README.org")))
+(keymap-global-set "C-c o c" '(lambda () (interactive) (find-file "~/.cfg/.config/emacs/config.org")))
+(keymap-global-set "C-c o s" '(lambda () (interactive) (find-file "~/.cfg/.config/sway/README.org")))
 (which-key-add-key-based-replacements
   "C-c o c" "Open Emacs Config"
   "C-c o s" "Open Sway Config")

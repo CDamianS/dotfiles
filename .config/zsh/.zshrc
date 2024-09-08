@@ -36,6 +36,11 @@ setopt hist_ignore_space
 zstyle ':completion:*' cache-path "$XDG_CACHE_HOME"/zsh/zcompcache
 compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-$ZSH_VERSION
 
+# Alias
+alias remacs="systemctl --user restart emacs"
+alias imv="imv-wayland"
+alias ls="ls --color"
+
 #PATH
 export PATH="/home/damian/.local/bin:$PATH"
 source $CARGO_HOME/env

@@ -49,7 +49,7 @@ set $mod Mod4
 
 ** Set apps
 #+begin_src conf
-set $term alacritty
+set $term foot
 set $eshell emacsclient -c -a 'emacs' --eval '(eshell)'
 set $editor emacsclient -c
 set $browser icecat

@@ -25,4 +25,5 @@ export BEMENU_OPTS='--fb "#1e1e2e"\
                     --tf "#89b4fa"\
                     --hf "#f9e2af"\
                     --af "#cdd6f4"\
-                    --ab "#1e1e2e"'
+                    --ab "#1e1e2e"\
+										-l 10'

@@ -1,6 +1,6 @@
 {
-  "layer": "top",
-  "position": "bottom",
+  "layer": "bottom",
+  "position": "top",
   "bar_id": "bar-0",
   "ipc": "true",
   "gtk-layer-shell": true,
@@ -80,8 +80,9 @@
   },
 
   "network": {
-    "format": "󰤨 {essid}",
+    "format": "󰤨 Connected",
     "format-disconnected": "󰤨 no internet!",
+    "tooltip-format": "{essid}"
   },
 
   "memory": {

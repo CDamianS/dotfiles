@@ -3,7 +3,7 @@
 use warnings;
 use strict;
 
-my $conf = `echo "sway\nemacs\nwaybar\ndunst\nkitty\nstarship\nbookmarks" | bemenu -l 10 -p "Config: "`;
+my $conf = `echo "sway\nemacs\nwaybar\ndunst\nkitty\nstarship\nbookmarks" | bemenu -p "Config: "`;
 my $editor = "emacsclient -c";
 chomp $conf;
 

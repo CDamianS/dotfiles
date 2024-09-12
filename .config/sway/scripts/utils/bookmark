@@ -1,2 +1,2 @@
 #!/usr/bin/env sh
-wtype $(cat $HOME/.local/share/bookmarks | bemenu -l 10)
+wtype $(cat $HOME/.local/share/bookmarks | bemenu -p "Type:")

@@ -51,6 +51,7 @@
 * Priorities
 ** Melpa
 #+begin_src emacs-lisp
+(require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 #+end_src
 

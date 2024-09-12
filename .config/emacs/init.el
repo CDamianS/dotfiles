@@ -8,9 +8,10 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("a690924a4483c8b8e42d62bc3f62d65d9e3cb40444de0f8c6ebfbca28baad579" default))
+   '("8ccbbbf5c197f80c9dce116408a248fde1ac4fedd9b5b7883e729eba83c9c64e" "a690924a4483c8b8e42d62bc3f62d65d9e3cb40444de0f8c6ebfbca28baad579" default))
+ '(org-drill-cram-hours 0)
  '(package-selected-packages
-   '(orderless vertico cheat-sh plz exec-path-from-shell gruvbox-theme raku-mode markdown-mode org-roam-ui org-roam org-super-agenda org-modern olivetti yasnippet-snippets which-key web-mode treesit-auto toggle-term toc-org sudo-edit sqlite-mode-extras sly restclient rainbow-mode rainbow-delimiters pyvenv php-mode pdf-tools org-bullets org-auto-tangle moonscript marginalia magit lua-mode ligature jtsx impatient-mode god-mode emojify emmet-mode elfeed-org elfeed-goodies ein eat doom-modeline dirvish dashboard corfu clojure-mode catppuccin-theme apheleia all-the-icons-dired all-the-icons-completion))
+   '(org-drill orderless vertico cheat-sh plz exec-path-from-shell gruvbox-theme raku-mode markdown-mode org-roam-ui org-roam org-super-agenda org-modern olivetti yasnippet-snippets which-key web-mode treesit-auto toggle-term toc-org sudo-edit sqlite-mode-extras sly restclient rainbow-mode rainbow-delimiters pyvenv php-mode pdf-tools org-bullets org-auto-tangle moonscript marginalia magit lua-mode ligature jtsx impatient-mode god-mode emojify emmet-mode elfeed-org elfeed-goodies ein eat doom-modeline dirvish dashboard corfu clojure-mode catppuccin-theme apheleia all-the-icons-dired all-the-icons-completion))
  '(package-vc-selected-packages
    '((one-tab-per-project :vc-backend Git :url "https://github.com/abougouffa/one-tab-per-project")
      (unique-dir-name :vc-backend Git :url "https://github.com/abougouffa/unique-dir-name"))))

@@ -13,7 +13,12 @@ export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 export PASSWORD_STORE_DIR="$XDG_DATA_HOME/pass"
 export WORKON_HOME="$XDG_DATA_HOME/virtualenvs"
 export BUN_INSTALL="$XDG_DATA_HOME"/bun
+export ZPLUG_HOME="$XDG_DATA_HOME"/zplug
 export ROSWELL_HOME="$XDG_DATA_HOME"/roswell
+export GNUPGHOME="$XDG_DATA_HOME"/gnupg
+
+#FIREFOX
+export MOZ_ENABLE_WAYLAND=1
 
 # Bemenu config is dumb
 export BEMENU_OPTS='--fb "#1e1e2e"\
@@ -26,4 +31,6 @@ export BEMENU_OPTS='--fb "#1e1e2e"\
                     --hf "#f9e2af"\
                     --af "#cdd6f4"\
                     --ab "#1e1e2e"\
-										-l 10'
+		    --fn "Arimo Nerd Font"\
+		    -H 24
+		    -i'

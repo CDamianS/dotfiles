@@ -29,7 +29,7 @@ window#waybar {
     min-width: 20px;
     /* border-radius: 5px; */
     /* margin: 6px 2px; */
-    padding: 2px 2px;
+    padding: 0px 2px;
     color: @blue;
 }
 
@@ -54,18 +54,15 @@ window#waybar {
 #network,
 #custom-playerctl {
     color: @foreground;
-    margin: 0px 4px;
-    padding: 2px 5px;
+    /* margin: 0px 4px; */
+    padding: 0px 6px;
     /* border-radius: 5px; */
 }
 
 /* Latte theme */
-/* #clock { */
-/*     color: @background; */
-/*     background-color: @blue; */
-/*     margin-left: 4px; */
-/*     padding: 2px 5px; */
-/* } */
+#clock {
+    margin-right: 4px;
+}
 
 /* #backlight { */
 /*     background-color: @magenta; */

@@ -13,7 +13,7 @@ closedir($dh);
 
 my $script_list = join("\n", @scripts);
 
-my $selected_script = `echo "$script_list" | bemenu -l 5 -p "Script: "`;
+my $selected_script = `echo "$script_list" | bemenu -p "Script: "`;
 
 if ($selected_script) {
     my $script_path = "$directory/$selected_script";

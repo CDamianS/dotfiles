@@ -12,7 +12,7 @@ set $music $term zellij a zmus
 
 font pango:Arimo Nerd Font 14
 
-output * bg ~/.config/sway/catberpunk.png fill
+output * bg ~/.config/sway/catflowers.png fill
 
 output eDP-1 {
     mode 1920x1080
@@ -80,7 +80,7 @@ bindsym $mod+Shift+i exec ~/.config/sway/scripts/utils/bookmark
 bindsym $mod+Shift+b exec ~/.config/sway/scripts/utils/bookmarkthis
 bindsym $mod+Shift+p exec ~/.config/sway/scripts/utils/colorpicker
 
-bindsym $mod+d exec bemenu-run -l 10 -p 
+bindsym $mod+d exec bemenu-run -p  -i
 bindsym $mod+x exec ~/.config/sway/scripts/wlogout
 
 # bindsym $mod+Shift+s exec grim --notify copy area
@@ -145,7 +145,7 @@ bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 bindsym XF86MonBrightnessDown exec brightnessctl set 5%- && bash ~/.config/sway/scripts/brightness
 bindsym XF86MonBrightnessUp exec brightnessctl set 5%+ && bash ~/.config/sway/scripts/brightness
 bindsym XF86Tools exec ~/.config/sway/scripts/utils/conf
-bindsym XF86Display exec mpv ~/Movies/Scream\ \(1996\)/Scream\ \(1996\).mp4
+bindsym XF86Display exec mpv ~/mov/Scream\ \(1996\)/Scream\ \(1996\).mp4
 bindsym XF86Favorites exec ~/.config/sway/scripts/utils/moviepicker
 
 # bindsym $mod+b splith
@@ -185,8 +185,8 @@ bindsym $mod+r mode "resize"
 
 include /etc/sway/config.d/*
 
-exec zellij -s zmus -l compact
 exec_always ~/.local/bin/autotiling
+exec emacs --daemon
 
 bar { 
   swaybar_command waybar

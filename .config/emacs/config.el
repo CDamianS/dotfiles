@@ -1,12 +1,30 @@
+(require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 
-(fido-vertical-mode)
-(keymap-set icomplete-minibuffer-map "TAB" 'icomplete-force-complete)
+(use-package vertico
+  :ensure t
+  :init (vertico-mode))
 
 (use-package savehist
   :ensure nil
   :init
   (savehist-mode))
+
+(use-package vertico-directory
+  :after vertico
+  :ensure nil
+  :bind (:map vertico-map
+              ("RET" . vertico-directory-enter)
+              ("DEL" . vertico-directory-delete-char)
+              ("M-DEL" . vertico-directory-delete-word))
+  :hook (rfn-eshadow-update-overlay . vertico-directory-tidy))
+
+(use-package orderless
+  :ensure t
+  :custom
+  (completion-styles '(orderless basic))
+  (completion-category-defaults nil)
+  (completion-category-overrides '((file (styles partial-completion)))))
 
 (use-package marginalia
   :ensure t
@@ -143,7 +161,8 @@
 
 (use-package elfeed
   :ensure t
-  :bind ("C-x w" . 'elfeed))
+  :bind ("C-x w" . 'elfeed)
+  :custom (elfeed-db-directory "~/.local/share/elfeed"))
 
 (use-package elfeed-goodies
   :ensure t
@@ -328,22 +347,6 @@
 
 (use-package pdf-tools :ensure t)
 
-(use-package persp-mode
-  :ensure t
-  :custom
-  (wg-morph-on nil)
-  (persp-autokill-buffer-on-remove 'kill-weak)
-  :hook (window-setup . (lambda () (persp-mode 1))))
-
-(use-package persp-mode-project-bridge
-  :ensure t
-  :hook
-  (persp-mode-project-bridge-mode . (lambda ()
-                                      (if persp-mode-project-bridge-mode
-                                          (persp-mode-project-bridge-find-perspectives-for-all-buffers)
-                                        (persp-mode-project-bridge-kill-perspectives))))
-  (persp-mode . persp-mode-project-bridge-mode))
-
 (use-package pyvenv :ensure t)
 
 (use-package rainbow-mode
@@ -381,8 +384,8 @@
 (keymap-global-set "C-c c c" 'compile)
 (keymap-global-set "C-c c r" 'recompile)
 
-(keymap-global-set "C-c o c" '(lambda () (interactive) (find-file "~/.config/emacs/config.org")))
-(keymap-global-set "C-c o s" '(lambda () (interactive) (find-file "~/.config/sway/README.org")))
+(keymap-global-set "C-c o c" '(lambda () (interactive) (find-file "~/.cfg/.config/emacs/config.org")))
+(keymap-global-set "C-c o s" '(lambda () (interactive) (find-file "~/.cfg/.config/sway/README.org")))
 (which-key-add-key-based-replacements
   "C-c o c" "Open Emacs Config"
   "C-c o s" "Open Sway Config")

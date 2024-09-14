@@ -47,17 +47,22 @@ compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-$ZSH_VERSION
 # Alias
 alias remacs="systemctl --user restart emacs"
 alias imv="imv-wayland"
-alias ls="ls --color"
+alias ls="exa"
+alias l="exa --icons -lah"
+alias cam="swayhide mpv /dev/video0 --profile=low-latency --untimed"
 
 #PATH
 export PATH="/home/damian/.local/bin:$PATH"
 source $CARGO_HOME/env
-# export PATH="$BUN_INSTALL/bin:$PATH"
-#[ -s "$BUN_INSTALL
-#/_bun" ] && source "$BUN_INSTALL/_bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+[ -s "$BUN_INSTALL 
+/_bun" ] && source "$BUN_INSTALL/_bun"
 
 # Zoxide
 eval "$(zoxide init zsh)"
 
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
+
+# bun completions
+[ -s "/home/damian/.local/share/bun/_bun" ] && source "/home/damian/.local/share/bun/_bun"

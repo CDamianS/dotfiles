@@ -16,6 +16,9 @@ export BUN_INSTALL="$XDG_DATA_HOME"/bun
 export ZPLUG_HOME="$XDG_DATA_HOME"/zplug
 export ROSWELL_HOME="$XDG_DATA_HOME"/roswell
 export GNUPGHOME="$XDG_DATA_HOME"/gnupg
+export TEXMFHOME=$XDG_DATA_HOME/texmf
+export TEXMFVAR=$XDG_CACHE_HOME/texlive/texmf-var
+export TEXMFCONFIG=$XDG_CONFIG_HOME/texlive/texmf-config
 
 #FIREFOX
 export MOZ_ENABLE_WAYLAND=1

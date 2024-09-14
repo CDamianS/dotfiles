@@ -15,10 +15,6 @@ if ($conf eq "sway") {
     `$editor ~/.config/waybar/config`;
 } elsif ($conf eq "dunst") {
     `$editor ~/.config/dunst/dunstrc`;
-} elsif ($conf eq "kitty") {
-    `$editor ~/.config/kitty/kitty.conf`;
-} elsif ($conf eq "starship") {
-    `$editor ~/.config/starship.toml`;
 } elsif ($conf eq "bookmarks") {
     `$editor ~/.local/share/bookmarks`;
 } else {

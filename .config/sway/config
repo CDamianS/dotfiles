@@ -68,7 +68,6 @@ bindsym $mod+Shift+w exec $browser
 bindsym $mod+Shift+alt+w exec firefox-devedition
 bindsym $mod+Shift+f exec $files
 bindsym $mod+Shift+r exec $rss
-bindsym $mod+Shift+a exec $agenda
 bindsym $mod+Shift+m exec $music
 bindsym $mod+p exec tessen -d bemenu
 bindsym $mod+Shift+u exec udiskie-dmenu --dmenu

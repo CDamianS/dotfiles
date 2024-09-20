@@ -1,0 +1,3 @@
+#!/usr/bin/sh
+
+systemctl --user restart emacs && notify-send Emacs Restarted

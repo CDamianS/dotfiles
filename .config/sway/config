@@ -1,7 +1,7 @@
 set $mod Mod4
 
 set $term foot
-set $eshell emacsclient -c -a 'emacs' --eval '(eshell)'
+set $eshell emacsclient -c -a 'emacs' --eval '(eat)'
 set $editor emacsclient -c
 set $browser icecat
 set $lock ~/.config/sway/scripts/lockscreen
@@ -12,7 +12,7 @@ set $music $term zellij a zmus
 
 font pango:Arimo Nerd Font 14
 
-output * bg ~/.config/sway/catflowers.png fill
+output * bg ~/.config/sway/catberpunk.png fill
 
 output eDP-1 {
     mode 1920x1080

@@ -47,6 +47,8 @@ compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-$ZSH_VERSION
 # Alias
 alias remacs="systemctl --user restart emacs"
 alias imv="imv-wayland"
+alias mpv="swayhide mpv"
+alias zathura="swayhide zathura"
 alias ls="exa"
 alias l="exa --icons -lah"
 alias cam="swayhide mpv /dev/video0 --profile=low-latency --untimed"

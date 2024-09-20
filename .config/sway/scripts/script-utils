@@ -1,21 +1,28 @@
-#!/usr/bin/perl
+#!/usr/bin/env bash
 
-use strict;
-use warnings;
+directories=(
+    "$HOME/.config/sway/scripts/utils/"
+    "$HOME/.local/bin/"
+)
 
-my $directory = '/home/damian/.config/sway/scripts/utils/';
+scripts=()
+for dir in "${directories[@]}"; do
+    if [ -d "$dir" ]; then
+        while IFS= read -r -d '' file; do
+            scripts+=("$(basename "$file")")
+        done < <(find "$dir" -maxdepth 1 -type f -print0)
+    fi
+done
 
-opendir(my $dh, $directory) or die "Cannot open directory: $!";
-my @scripts = grep { -f "$directory/$_" } readdir($dh);
-closedir($dh);
+selected_script=$(printf "%s\n" "${scripts[@]}" | bemenu -p "Script: ")
 
-@scripts = sort @scripts;
+for dir in "${directories[@]}"; do
+    full_path=$(find "$dir" -maxdepth 1 -type f -name "$selected_script")
+    if [ -n "$full_path" ]; then
+        break
+    fi
+done
 
-my $script_list = join("\n", @scripts);
-
-my $selected_script = `echo "$script_list" | bemenu -p "Script: "`;
-
-if ($selected_script) {
-    my $script_path = "$directory/$selected_script";
-    system("perl $script_path");
-}
+if [ -n "$full_path" ] && [ -f "$full_path" ]; then
+    perl "$full_path"
+fi

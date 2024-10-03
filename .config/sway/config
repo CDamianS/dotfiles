@@ -8,7 +8,7 @@ set $lock ~/.config/sway/scripts/lockscreen
 set $files $editor --eval '(dirvish)'
 set $agenda emacsclient -c -a 'emacs' --eval '(find-file "~/Agenda/Agenda.org")'
 set $rss emacsclient -c -a 'emacs' --eval '(elfeed)'
-set $music $term zellij a zmus
+set $music $term cmus
 
 font pango:Arimo Nerd Font 14
 
@@ -149,6 +149,7 @@ bindsym XF86Favorites exec ~/.config/sway/scripts/utils/moviepicker
 
 # bindsym $mod+b splith
 # bindsym $mod+v splitv
+bindsym $mod+Shift+a sticky toggle
 
 bindsym $mod+b exec killall -SIGUSR1 waybar
 

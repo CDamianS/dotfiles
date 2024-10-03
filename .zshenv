@@ -9,6 +9,8 @@ export XDG_STATE_HOME="$HOME/.local/state"
 # COMPLY WITH THE SYSTEM >:(
 export PYTHON_HISTORY="$XDG_STATE_HOME/python/history"
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
+export GOPATH="$XDG_DATA_HOME"/go
+export GOMODCACHE="$XDG_CACHE_HOME"/go/mod
 export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 export PASSWORD_STORE_DIR="$XDG_DATA_HOME/pass"
 export WORKON_HOME="$XDG_DATA_HOME/virtualenvs"
@@ -20,9 +22,7 @@ export TEXMFHOME=$XDG_DATA_HOME/texmf
 export TEXMFVAR=$XDG_CACHE_HOME/texlive/texmf-var
 export TEXMFCONFIG=$XDG_CONFIG_HOME/texlive/texmf-config
 export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
-
-#FIREFOX
-export MOZ_ENABLE_WAYLAND=1
+export WORKON_HOME="$XDG_DATA_HOME/virtualenvs"
 
 # Bemenu config is dumb
 export BEMENU_OPTS='--fb "#1e1e2e"\

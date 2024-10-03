@@ -15,13 +15,12 @@ window#waybar {
 #window {
     /* margin: 2px 0; */
     background: @background;
-    padding: 0 10px;
 }
 
 #mode {
-    /* margin: 2px 0; */
-    padding: 0 10px;
-    margin-left: 0;
+    margin: 2px 0;
+    /* padding: 0 4px; */
+    /* margin-left: 0; */
     background: @background;
 }
 
@@ -54,8 +53,8 @@ window#waybar {
 #network,
 #custom-playerctl {
     color: @foreground;
-    /* margin: 0px 4px; */
-    padding: 0px 6px;
+    margin: 0px 4px;
+    padding: 0px 1px;
     /* border-radius: 5px; */
 }
 

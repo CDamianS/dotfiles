@@ -1,0 +1,11 @@
+@define-color background #282828; /* Gruvbox Dark Background */
+@define-color foreground #ebdbb2; /* Gruvbox Light Foreground */
+@define-color grey #a89984; /* Gruvbox Grey */
+@define-color red #fb4934; /* Gruvbox Red */
+@define-color magenta #d3869b; /* Gruvbox Magenta */
+@define-color violet #b16286; /* Gruvbox Purple */
+@define-color orange #fe8019; /* Gruvbox Orange */
+@define-color yellow #fabd2f; /* Gruvbox Yellow */
+@define-color teal #8ec07c; /* Gruvbox Aqua */
+@define-color green #b8bb26; /* Gruvbox Green */
+@define-color blue #83a598; /* Gruvbox Blue */

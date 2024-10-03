@@ -60,21 +60,42 @@
                             "|||>" "<|||" "<|>" "..." ".." ".=" "..<" ".?" "::" ":::" ":=" "::=" ":?" ":?>" "//" "///" "/*" "*/" "/="
                             "//=" "/==" "@_" "__" "???" "<:<" ";;;")) (global-ligature-mode t))
 
+(use-package emms
+  :ensure t
+  :hook (emms-player-started . emms-show)
+  :config
+  (emms-all)
+  (emms-default-players)
+  (emms-mpris-enable)
+  :custom (emms-source-file-default-directory "~/mus/")
+  :bind (("C-c m s" . 'emms-play-directory-tree)
+         ("C-c m p" . 'emms-pause)
+         ("C-c m o" . 'emms)))
+
+(use-package exec-path-from-shell
+  :ensure t
+  :init (exec-path-from-shell-initialize)
+  :custom (exec-path-from-shell-variables '("WORKON_HOME" "ROSWELL_HOME" "PATH")))
+
 (use-package avy :ensure t :config (avy-setup-default) :bind ("M-j" . 'avy-goto-char-timer))
 (use-package apheleia :ensure t :init (apheleia-global-mode +1))
 (use-package catppuccin-theme :ensure t :init (load-theme 'catppuccin :noconfirm))
 (use-package corfu :ensure t :custom (corfu-auto t) :init (global-corfu-mode))
 (use-package doom-modeline :ensure t :init (doom-modeline-mode 1))
 (use-package eat :ensure t :config (advice-add #'project-shell :override #'eat-project))
+(use-package eglot-booster :after eglot :config (eglot-booster-mode))
+(use-package emms-mode-line-cycle :ensure t :config (emms-mode-line-cycle 1))
+(use-package flycheck :ensure t :init (global-flycheck-mode))
+(use-package flycheck-inline :ensure t :hook (flycheck-mode . flycheck-inline-mode))
 (use-package magit :ensure t :config (advice-add #'project-vc-dir :override #'magit))
 (use-package nerd-icons-completion :ensure t :init (nerd-icons-completion-mode))
 (use-package nerd-icons-dired :ensure t :hook (dired-mode . nerd-icons-dired-mode))
 (use-package rainbow-delimiters :ensure t :hook prog-mode org-mode)
+(use-package sly :ensure t :custom (inferior-lisp-program "ros -Q run"))
 (use-package sudo-edit :ensure t)
-(use-package treesit-auto :ensure t :config (global-treesit-auto-mode))
+(use-package treesit-auto :custom (treesit-auto-install 'prompt) :config (treesit-auto-add-to-auto-mode-alist 'all) (global-treesit-auto-mode))
 (use-package yasnippet :ensure t)
-(use-package yasnippet-snippets :ensure t :after yasnippet :config (yas-global-mode t)
-  :custom (yas-snippets-dirs '("~/.config/emacs/elpaca/builds/yasnippet-snippets/")))
+(use-package yasnippet-snippets :ensure t :after yasnippet :config (yas-global-mode t))
 
 ;; Languages
 (use-package pyvenv :ensure t)
@@ -91,7 +112,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(ligature eat raku-mode nerd-icons-completion nerd-icons-dired avy doom-modeline emmet-mode php-mode lua-mode web-mode jtsx treesit-auto sudo-edit rainbow-delimiters corfu catppuccin-theme apheleia yasnippet-snippets which-key pyvenv pdf-tools marginalia magit)))
+   '(flycheck-inline flycheck eglot-booster emms-mode-line-cycle emms ligature eat raku-mode nerd-icons-completion nerd-icons-dired avy doom-modeline emmet-mode php-mode lua-mode web-mode jtsx treesit-auto sudo-edit rainbow-delimiters corfu catppuccin-theme apheleia yasnippet-snippets which-key pyvenv pdf-tools marginalia magit))
+ '(package-vc-selected-packages
+   '((eglot-booster :vc-backend Git :url "https://github.com/jdtsmith/eglot-booster"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

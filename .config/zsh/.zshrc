@@ -19,6 +19,7 @@ zplug load
 # Load completions
 autoload -U compinit
 zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zmodload zsh/complist
 compinit
 _comp_option+=(globdots)
@@ -57,11 +58,14 @@ alias cam="swayhide mpv /dev/video0 --profile=low-latency --untimed"
 export PATH="/home/damian/.local/bin:$PATH"
 source $CARGO_HOME/env
 export PATH="$BUN_INSTALL/bin:$PATH"
+export PATH=$PATH:/usr/local/go/bin
+export PATH=$PATH:$XDG_DATA_HOME/go/bin
 [ -s "$BUN_INSTALL 
 /_bun" ] && source "$BUN_INSTALL/_bun"
 
 # Zoxide
 eval "$(zoxide init zsh)"
+
 
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh

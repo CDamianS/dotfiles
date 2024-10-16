@@ -52,7 +52,8 @@ set $mod Mod4
 set $term foot
 set $eshell emacsclient -c -a 'emacs' --eval '(eat)'
 set $editor emacsclient -c
-set $browser icecat
+set $browser chromium
+set $altbrowser icecat
 set $lock ~/.config/sway/scripts/lockscreen
 set $files $editor --eval '(dirvish)'
 set $agenda emacsclient -c -a 'emacs' --eval '(find-file "~/Agenda/Agenda.org")'
@@ -159,7 +160,7 @@ bindsym Control+alt+t exec emacsclient -c -a 'emacs' --eval '(eshell)'
 #+begin_src conf
 bindsym $mod+Shift+e exec $editor
 bindsym $mod+Shift+w exec $browser
-bindsym $mod+Shift+alt+w exec firefox-devedition
+bindsym $mod+Shift+alt+w exec $altbrowser
 bindsym $mod+Shift+f exec $files
 bindsym $mod+Shift+r exec $rss
 bindsym $mod+Shift+m exec $music

@@ -1,0 +1,4 @@
+;;;; -*- mode: lisp-data -*-
+(
+ (:id "sha1:5f9a1d085cc12086ec96a5fd8fd50bfa7b8a5672" :fingerprints ("sha1:40:37:6d:13:7e:27:ee:d7:f8:3a:94:6c:c8:08:0f:87:66:27:e7:bc") :host "trisquel.org:443" :conditions (:no-host-match :verify-cert))
+)

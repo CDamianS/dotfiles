@@ -1,0 +1,310 @@
+#+title: Emacs Dotfiles
+#+author: Damian Suarez
+
+* Table of contents :toc:
+- [[#priorities][Priorities]]
+  - [[#melpa-repos][Melpa repos]]
+  - [[#completion][Completion]]
+- [[#modes][Modes]]
+- [[#vars][Vars]]
+- [[#defaults][Defaults]]
+- [[#hooks][Hooks]]
+- [[#extra-configs][Extra configs]]
+- [[#packages][Packages]]
+  - [[#avy][Avy]]
+  - [[#apheleia][Apheleia]]
+  - [[#catppuccin-theme][Catppuccin Theme]]
+  - [[#corfu][Corfu]]
+  - [[#doom-modeline][Doom modeline]]
+  - [[#eat][EAT]]
+  - [[#eglot-booster][Eglot Booster]]
+  - [[#enlight][Enlight]]
+  - [[#exec-path-from-shell][Exec path from shell]]
+  - [[#languages][Languages]]
+  - [[#ligatures][Ligatures]]
+  - [[#magit][Magit]]
+  - [[#nerd-icons][Nerd Icons]]
+  - [[#org-mode-packages][Org Mode Packages]]
+  - [[#rainbow-delimiters][Rainbow Delimiters]]
+  - [[#sly][Sly]]
+  - [[#sudo-edit][Sudo Edit]]
+  - [[#treesit][Treesit]]
+  - [[#yasnippets][Yasnippets]]
+
+* Priorities
+** Melpa repos
+#+begin_src emacs-lisp
+(use-package package
+  :config (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t))
+#+end_src
+
+** Completion
+#+begin_src emacs-lisp
+(use-package icomplete
+  :init (fido-vertical-mode)
+  :bind (:map icomplete-minibuffer-map ("TAB" . 'icomplete-force-complete))
+  :hook (icomplete-minibuffer-setup . (lambda () (setq truncate-lines t))))
+(use-package savehist :init (savehist-mode))
+(use-package marginalia :ensure t :init (marginalia-mode))
+#+end_src
+
+* Modes
+#+begin_src emacs-lisp
+(electric-pair-mode 1)
+(menu-bar-mode -1)
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
+(pixel-scroll-precision-mode 1)
+(pixel-scroll-mode 1)
+#+end_src
+
+* Vars
+#+begin_src emacs-lisp
+(setq electric-pair-inhibit-predicate `(lambda (c) (if (char-equal c ?\<) t (,electric-pair-inhibit-predicate c)))
+      create-lockfiles nil
+      backup-directory-alist `(("." . ,(concat user-emacs-directory "backups")))
+      scroll-step 1
+      scroll-conservatively  10000
+      scroll-margin 8
+      indent-line-function 'insert-tab
+      use-dialog-box nil
+      org-src-preserve-indentation t
+      initial-scratch-message ""
+      split-width-threshold 0
+      split-height-threshold nil)
+#+end_src
+
+* Defaults
+#+begin_src emacs-lisp    
+(setq-default indent-tabs-mode nil
+              tab-width 4
+              truncate-lines t)
+#+end_src   
+
+* Hooks
+#+begin_src emacs-lisp    
+(add-hook 'prog-mode-hook 'display-line-numbers-mode)
+(add-hook 'dired-mode-hook 'dired-hide-details-mode)
+#+end_src
+
+* Extra configs
+#+begin_src emacs-lisp    
+(add-to-list 'default-frame-alist '(font . "JetBrainsMono Nerd Font 14"))
+(add-to-list 'default-frame-alist '(alpha-background . 90))
+(set-frame-parameter nil 'alpha-background 90)
+(fset 'yes-or-no-p 'y-or-n-p)
+(defun on-after-init ()
+  (unless (display-graphic-p (selected-frame))
+    (set-face-background 'default "unspecified-bg" (selected-frame))))
+
+(add-hook 'window-setup-hook 'on-after-init)
+#+end_src
+
+* Packages
+** Avy
+#+begin_src emacs-lisp    
+(use-package avy 
+    :ensure t 
+    :config (avy-setup-default) 
+    :bind ("M-j" . 'avy-goto-char-timer))
+#+end_src   
+
+** Apheleia
+#+begin_src emacs-lisp    
+(use-package apheleia 
+    :ensure t 
+    :init (apheleia-global-mode))
+#+end_src   
+
+** Catppuccin Theme
+#+begin_src emacs-lisp    
+(use-package catppuccin-theme 
+    :ensure t 
+    :init (load-theme 'catppuccin :noconfirm))
+#+end_src   
+
+** Corfu
+#+begin_src emacs-lisp    
+(use-package corfu 
+    :ensure t 
+    :custom (corfu-auto t) 
+    :init (global-corfu-mode))
+#+end_src   
+
+** Doom modeline
+#+begin_src emacs-lisp    
+(use-package doom-modeline 
+    :ensure t 
+    :init (doom-modeline-mode 1))
+#+end_src   
+
+** EAT
+#+begin_src emacs-lisp    
+(use-package eat 
+    :ensure t 
+    :config (advice-add #'project-shell :override #'eat-project))
+#+end_src   
+
+** Eglot Booster
+Installed different
+#+begin_src emacs-lisp    
+(use-package eglot-booster 
+    :after eglot 
+    :config (eglot-booster-mode))
+#+end_src
+
+** Enlight
+#+begin_src emacs-lisp    
+(use-package enlight
+  :ensure t
+  :config (setopt initial-buffer-choice #'enlight)
+  :custom (enlight-content
+           (concat
+            (propertize "Welcome to emacs!" 'face 'highlight)
+            "\n"
+            (enlight-menu
+             '(("Actions"
+                ("Find file" find-file "f"))
+               ("Projects"
+	            ("Open projects" project-switch-project "p"))
+               ("Open config files"
+	            ("Sway config" (find-file "~/dots/.config/sway/README.org") "s")
+                ("Emacs config" (find-file "~/dots/.config/emacs/README.org") "e"))))
+            "\n"
+            (propertize "Esperanto word of the Day" 'face 'highlight)
+            "\n"
+            (with-temp-buffer
+              (insert-file-contents "~/.local/share/esperanto")
+              (let ((lines (split-string (buffer-string) "\n" t)))
+                (nth (random (length lines)) lines))))))
+#+end_src
+
+** Exec path from shell
+#+begin_src emacs-lisp    
+(use-package exec-path-from-shell
+  :ensure t
+  :init (exec-path-from-shell-initialize))
+(exec-path-from-shell-initialize)
+#+end_src   
+
+** Languages
+#+begin_src emacs-lisp    
+(use-package pyvenv :ensure t)
+(use-package jtsx :ensure t)
+(use-package web-mode :ensure t)
+(use-package php-mode :ensure t)
+(use-package lua-mode :ensure t)
+(use-package raku-mode :ensure t)
+(use-package emmet-mode 
+    :ensure t 
+    :hook web-mode tsx-ts-mode js-mode html-mode)
+#+end_src
+
+** Ligatures
+#+begin_src emacs-lisp
+(use-package ligature
+  :ensure t
+  :config
+  (ligature-set-ligatures 'prog-mode
+                          '("--" "---" "==" "===" "!=" "!==" "=!=" "=:=" "=/=" "<=" ">=" "&&" "&&&" "&=" "++" "+++" "***" ";;" "!!"
+                            "??" "???" "?:" "?." "?=" "<:" ":<" ":>" ">:" "<:<" "<>" "<<<" ">>>" "<<" ">>" "||" "-|" "_|_" "|-" "||-"
+                            "|=" "||=" "##" "###" "####" "#{" "#[" "]#" "#(" "#?" "#_" "#_(" "#:" "#!" "#=" "^=" "<$>" "<$" "$>" "<+>"
+                            "<+" "+>" "<*>" "<*" "*>" "</" "</>" "/>" "<!--" "<#--" "-->" "->" "->>" "<<-" "<-" "<=<" "=<<" "<<=" "<=="
+                            "<=>" "<==>" "==>" "=>" "=>>" ">=>" ">>=" ">>-" ">-" "-<" "-<<" ">->" "<-<" "<-|" "<=|" "|=>" "|->" "<->"
+                            "<~~" "<~" "<~>" "~~" "~~>" "~>" "~-" "-~" "~@" "[||]" "|]" "[|" "|}" "{|" "[<" ">]" "|>" "<|" "||>" "<||"
+                            "|||>" "<|||" "<|>" "..." ".." ".=" "..<" ".?" "::" ":::" ":=" "::=" ":?" ":?>" "//" "///" "/*" "*/" "/="
+                            "//=" "/==" "@_" "__" "???" "<:<" ";;;")) (global-ligature-mode t))
+#+end_src
+
+** Magit
+*** Forge
+#+begin_src emacs-lisp    
+(use-package forge 
+    :ensure t 
+    :after magit 
+    :custom (auth-sources '("~/.local/share/authinfo")))
+#+end_src   
+
+*** Magit
+#+begin_src emacs-lisp    
+(use-package magit 
+    :ensure t 
+    :config (advice-add #'project-vc-dir :override #'magit)
+    :custom epg-pinentry-mode 'loopback)
+#+end_src
+
+
+** Nerd Icons
+*** Completion
+#+begin_src emacs-lisp    
+(use-package nerd-icons-completion 
+    :ensure t 
+    :init (nerd-icons-completion-mode))
+#+end_src
+*** Dired
+#+begin_src emacs-lisp    
+(use-package nerd-icons-dired 
+    :ensure t 
+    :hook (dired-mode . nerd-icons-dired-mode))
+#+end_src 
+
+** Org Mode Packages
+*** Auto Tangle
+#+begin_src emacs-lisp    
+(use-package org-auto-tangle
+  :ensure t
+  :defer t
+  :hook (org-mode . org-auto-tangle-mode))
+#+end_src
+
+*** Table of contents
+#+begin_src emacs-lisp    
+(use-package toc-org
+  :ensure t
+  :commands toc-org-enable
+  :hook (org-mode . toc-org-enable))
+#+end_src
+
+*** Modern
+#+begin_src emacs-lisp    
+(use-package org-modern
+  :ensure t
+  :init (global-org-modern-mode)
+  :custom (org-modern-star 'replace))
+#+end_src
+
+** Rainbow Delimiters
+#+begin_src emacs-lisp    
+(use-package rainbow-delimiters 
+    :ensure t 
+    :hook prog-mode org-mode)
+#+end_src
+
+** Sly
+#+begin_src emacs-lisp    
+(use-package sly 
+    :ensure t 
+    :custom (inferior-lisp-program "ros -Q run"))
+#+end_src
+
+** Sudo Edit
+#+begin_src emacs-lisp    
+(use-package sudo-edit :ensure t)
+#+end_src
+
+** Treesit
+#+begin_src emacs-lisp    
+(use-package treesit-auto 
+    :ensure t
+    :custom (treesit-auto-install 'prompt) 
+    :config (treesit-auto-add-to-auto-mode-alist 'all) (global-treesit-auto-mode))
+#+end_src
+
+** Yasnippets
+#+begin_src emacs-lisp    
+(use-package yasnippet :ensure t)
+(use-package yasnippet-snippets 
+    :ensure t 
+    :after yasnippet 
+    :config (yas-global-mode t))
+#+end_src   

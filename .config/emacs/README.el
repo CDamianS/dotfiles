@@ -100,8 +100,8 @@
 
 (use-package exec-path-from-shell
   :ensure t
-  :init (exec-path-from-shell-initialize))
-(exec-path-from-shell-initialize)
+  :init (exec-path-from-shell-initialize)
+  :custom (exec-path-from-shell-variables '("ROSWELL_HOME" "GOPATH" "WORKON_HOME" "PATH")))
 
 (use-package pyvenv :ensure t)
 (use-package jtsx :ensure t)

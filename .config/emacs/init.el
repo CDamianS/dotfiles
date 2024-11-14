@@ -9,7 +9,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(php-mode gruvbox-theme highlight-indent-guides go-mode toc-org org-modern enlight treepy forge flycheck-inline flycheck eglot-booster ligature eat raku-mode nerd-icons-completion nerd-icons-dired avy doom-modeline emmet-mode lua-mode web-mode jtsx treesit-auto sudo-edit rainbow-delimiters corfu catppuccin-theme apheleia yasnippet-snippets which-key pyvenv pdf-tools marginalia magit))
+   '(lsp-mode lsp-java leetcode php-mode gruvbox-theme highlight-indent-guides go-mode toc-org org-modern enlight treepy forge flycheck-inline flycheck eglot-booster ligature eat raku-mode nerd-icons-completion nerd-icons-dired avy doom-modeline emmet-mode lua-mode web-mode jtsx treesit-auto sudo-edit rainbow-delimiters corfu catppuccin-theme apheleia yasnippet-snippets which-key pyvenv pdf-tools marginalia magit))
  '(package-vc-selected-packages
    '((eglot-booster :vc-backend Git :url "https://github.com/jdtsmith/eglot-booster"))))
 (custom-set-faces

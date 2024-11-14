@@ -68,7 +68,7 @@ font pango:Arimo Nerd Font 14
 
 ** Background
 #+begin_src conf
-output * bg ~/.config/sway/catberpunk.png fill
+output * bg ~/.config/sway/catsky.png fill
 #+end_src
 
 ** Scale

@@ -23,6 +23,14 @@ export TEXMFVAR=$XDG_CACHE_HOME/texlive/texmf-var
 export TEXMFCONFIG=$XDG_CONFIG_HOME/texlive/texmf-config
 export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
 export WORKON_HOME="$XDG_DATA_HOME/virtualenvs"
+export PATH="$HOME/.local/share/perl/bin${PATH:+:${PATH}}"
+export PERL5LIB="$HOME/.local/share/perl/lib/perl5"
+export PERL_LOCAL_LIB_ROOT="$HOME/.local/share/perl"
+export PERL_MB_OPT="--install_base '$HOME/.local/share/perl'"
+export PERL_MM_OPT="INSTALL_BASE=$HOME/.local/share/perl"
+
+# Imagine using electron in 2025
+export ELECTRON_OZONE_PLATFORM_HINT=auto
 
 # Bemenu config is dumb
 export BEMENU_OPTS='--fb "#1e1e2e"\

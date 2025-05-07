@@ -8,6 +8,8 @@ call plug#begin()
 	Plug 'jiangmiao/auto-pairs'
 	Plug 'tribela/vim-transparent'
 	Plug 'catppuccin/vim', { 'as': 'catppuccin'  }
+	Plug 'leafo/moonscript-vim'
+	Plug 'kchmck/vim-coffee-script'
 call plug#end()
 
 packadd! CtrlP

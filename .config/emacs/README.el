@@ -45,14 +45,13 @@
 
 (add-hook 'window-setup-hook 'on-after-init)
 
-(use-package avy 
-    :ensure t 
-    :config (avy-setup-default) 
-    :bind ("M-j" . 'avy-goto-char-timer))
-
 (use-package apheleia 
     :ensure t 
     :init (apheleia-global-mode))
+
+(use-package beacon
+  :ensure t
+  :init (beacon-mode 1))
 
 (use-package catppuccin-theme 
     :ensure t 
@@ -67,13 +66,33 @@
     :ensure t 
     :init (doom-modeline-mode 1))
 
+(use-package dumb-jump
+  :ensure t
+  :hook (xref-backend-functions . dumb-jump-xref-activate)
+  :custom (xref-show-definitions-function #'xref-show-definitions-completing-read))
+
 (use-package eat 
     :ensure t 
     :config (advice-add #'project-shell :override #'eat-project))
 
-(use-package eglot-booster 
-    :after eglot 
-    :config (eglot-booster-mode))
+(use-package eglot-booster
+  :vc (:url "https://github.com/jdtsmith/eglot-booster")
+  :after eglot
+  :config (eglot-booster-mode))
+
+(use-package elfeed
+  :ensure t
+  :custom (elfeed-db-directory "~/.local/share/elfeed")
+  :bind ("C-x w" . elfeed))
+
+(use-package elfeed-org
+  :ensure t
+  :custom (rmh-elfeed-org-files (list "~/.local/share/elfeed.org"))
+  :init (elfeed-org))
+
+(use-package elfeed-goodies
+  :ensure t
+  :config (elfeed-goodies/setup))
 
 (use-package enlight
   :ensure t
@@ -104,14 +123,10 @@
   :custom (exec-path-from-shell-variables '("ROSWELL_HOME" "GOPATH" "WORKON_HOME" "PATH")))
 
 (use-package pyvenv :ensure t)
-(use-package jtsx :ensure t)
 (use-package web-mode :ensure t)
-(use-package php-mode :ensure t)
-(use-package lua-mode :ensure t)
-(use-package raku-mode :ensure t)
 (use-package emmet-mode 
     :ensure t 
-    :hook web-mode tsx-ts-mode js-mode html-mode)
+    :hook tsx-ts-mode js-mode html-mode php-ts-mode)
 
 (use-package ligature
   :ensure t

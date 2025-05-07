@@ -52,12 +52,11 @@ set $mod Mod4
 set $term foot
 set $eshell emacsclient -c -a 'emacs' --eval '(eat)'
 set $editor emacsclient -c
-set $browser chromium
-set $altbrowser icecat
+set $browser icecat
+set $altbrowser brave-browser
 set $lock ~/.config/sway/scripts/lockscreen
 set $files $editor --eval '(dirvish)'
 set $agenda emacsclient -c -a 'emacs' --eval '(find-file "~/Agenda/Agenda.org")'
-set $rss emacsclient -c -a 'emacs' --eval '(elfeed)'
 set $music $term cmus
 #+end_src
 
@@ -68,7 +67,7 @@ font pango:Arimo Nerd Font 14
 
 ** Background
 #+begin_src conf
-output * bg ~/.config/sway/catsky.png fill
+output * bg ~/.config/sway/catsby.png fill
 #+end_src
 
 ** Scale
@@ -153,7 +152,6 @@ Most of them are just emacs
 #+begin_src conf
 bindsym $mod+Return exec $term
 bindsym $mod+Shift+Return exec $eshell
-bindsym Control+alt+t exec emacsclient -c -a 'emacs' --eval '(eshell)'
 #+end_src
 
 ** General apps
@@ -162,7 +160,6 @@ bindsym $mod+Shift+e exec $editor
 bindsym $mod+Shift+w exec $browser
 bindsym $mod+Shift+alt+w exec $altbrowser
 bindsym $mod+Shift+f exec $files
-bindsym $mod+Shift+r exec $rss
 bindsym $mod+Shift+m exec $music
 bindsym $mod+p exec tessen -d bemenu
 bindsym $mod+Shift+u exec udiskie-dmenu --dmenu
@@ -349,7 +346,7 @@ bindsym $mod+r mode "resize"
 
 ** Opacity
 #+begin_src conf
-# for_window [app_id="icecat"] opacity set 0.9
+for_window [app_id="codium"] opacity set 0.9
 #+end_src
 
 ** Misc

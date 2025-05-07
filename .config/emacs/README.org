@@ -1,4 +1,4 @@
-#+title: Emacs Dotfiles
+#+title: Damian's Emacs Config
 #+author: Damian Suarez
 
 * Table of contents :toc:
@@ -11,13 +11,15 @@
 - [[#hooks][Hooks]]
 - [[#extra-configs][Extra configs]]
 - [[#packages][Packages]]
-  - [[#avy][Avy]]
   - [[#apheleia][Apheleia]]
+  - [[#beacon][Beacon]]
   - [[#catppuccin-theme][Catppuccin Theme]]
   - [[#corfu][Corfu]]
   - [[#doom-modeline][Doom modeline]]
+  - [[#dumb-jump][Dumb jump]]
   - [[#eat][EAT]]
   - [[#eglot-booster][Eglot Booster]]
+  - [[#elfeed][Elfeed]]
   - [[#enlight][Enlight]]
   - [[#exec-path-from-shell][Exec path from shell]]
   - [[#languages][Languages]]
@@ -101,27 +103,26 @@
 #+end_src
 
 * Packages
-** Avy
-#+begin_src emacs-lisp    
-(use-package avy 
-    :ensure t 
-    :config (avy-setup-default) 
-    :bind ("M-j" . 'avy-goto-char-timer))
-#+end_src   
-
 ** Apheleia
 #+begin_src emacs-lisp    
 (use-package apheleia 
     :ensure t 
     :init (apheleia-global-mode))
-#+end_src   
+#+end_src
+
+** Beacon
+#+begin_src emacs-lisp
+(use-package beacon
+  :ensure t
+  :init (beacon-mode 1))
+#+end_src
 
 ** Catppuccin Theme
 #+begin_src emacs-lisp    
 (use-package catppuccin-theme 
     :ensure t 
     :init (load-theme 'catppuccin :noconfirm))
-#+end_src   
+#+end_src
 
 ** Corfu
 #+begin_src emacs-lisp    
@@ -136,22 +137,51 @@
 (use-package doom-modeline 
     :ensure t 
     :init (doom-modeline-mode 1))
-#+end_src   
+#+end_src
+
+** Dumb jump
+To the definition
+#+begin_src emacs-lisp
+(use-package dumb-jump
+  :ensure t
+  :hook (xref-backend-functions . dumb-jump-xref-activate)
+  :custom (xref-show-definitions-function #'xref-show-definitions-completing-read))
+#+end_src
 
 ** EAT
 #+begin_src emacs-lisp    
 (use-package eat 
     :ensure t 
     :config (advice-add #'project-shell :override #'eat-project))
-#+end_src   
+#+end_src
 
 ** Eglot Booster
 Installed different
 #+begin_src emacs-lisp    
-(use-package eglot-booster 
-    :after eglot 
-    :config (eglot-booster-mode))
+(use-package eglot-booster
+  :vc (:url "https://github.com/jdtsmith/eglot-booster")
+  :after eglot
+  :config (eglot-booster-mode))
 #+end_src
+
+** Elfeed
+#+begin_src emacs-lisp
+(use-package elfeed
+  :ensure t
+  :custom (elfeed-db-directory "~/.local/share/elfeed")
+  :bind ("C-x w" . elfeed))
+
+(use-package elfeed-org
+  :ensure t
+  :custom (rmh-elfeed-org-files (list "~/.local/share/elfeed.org"))
+  :init (elfeed-org))
+
+(use-package elfeed-goodies
+  :ensure t
+  :config (elfeed-goodies/setup))
+#+end_src
+
+#+RESULTS:
 
 ** Enlight
 #+begin_src emacs-lisp    
@@ -185,19 +215,15 @@ Installed different
   :ensure t
   :init (exec-path-from-shell-initialize)
   :custom (exec-path-from-shell-variables '("ROSWELL_HOME" "GOPATH" "WORKON_HOME" "PATH")))
-#+end_src   
+#+end_src
 
 ** Languages
 #+begin_src emacs-lisp    
 (use-package pyvenv :ensure t)
-(use-package jtsx :ensure t)
 (use-package web-mode :ensure t)
-(use-package php-mode :ensure t)
-(use-package lua-mode :ensure t)
-(use-package raku-mode :ensure t)
 (use-package emmet-mode 
     :ensure t 
-    :hook web-mode tsx-ts-mode js-mode html-mode)
+    :hook tsx-ts-mode js-mode html-mode php-ts-mode)
 #+end_src
 
 ** Ligatures
@@ -233,7 +259,6 @@ Installed different
     :custom epg-pinentry-mode 'loopback)
 #+end_src
 
-
 ** Nerd Icons
 *** Completion
 #+begin_src emacs-lisp    
@@ -246,7 +271,7 @@ Installed different
 (use-package nerd-icons-dired 
     :ensure t 
     :hook (dired-mode . nerd-icons-dired-mode))
-#+end_src 
+#+end_src
 
 ** Org Mode Packages
 *** Auto Tangle

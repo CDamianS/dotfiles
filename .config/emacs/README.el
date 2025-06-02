@@ -39,11 +39,7 @@
 (add-to-list 'default-frame-alist '(alpha-background . 90))
 (set-frame-parameter nil 'alpha-background 90)
 (fset 'yes-or-no-p 'y-or-n-p)
-(defun on-after-init ()
-  (unless (display-graphic-p (selected-frame))
-    (set-face-background 'default "unspecified-bg" (selected-frame))))
-
-(add-hook 'window-setup-hook 'on-after-init)
+(require 'org-tempo)
 
 (use-package apheleia 
     :ensure t 
@@ -57,10 +53,12 @@
     :ensure t 
     :init (load-theme 'catppuccin :noconfirm))
 
-(use-package corfu 
-    :ensure t 
-    :custom (corfu-auto t) 
-    :init (global-corfu-mode))
+(use-package completion-preview
+  :ensure nil
+  :hook (prog-mode . completion-preview-mode)
+  :bind ( :map completion-preview-active-mode-map
+          ("M-n" . completion-preview-next-candidate)
+          ("M-p" . completion-preview-prev-candidate)))
 
 (use-package doom-modeline 
     :ensure t 
@@ -72,27 +70,71 @@
   :custom (xref-show-definitions-function #'xref-show-definitions-completing-read))
 
 (use-package eat 
-    :ensure t 
-    :config (advice-add #'project-shell :override #'eat-project))
+  :ensure t
+  :hook (eshell-load . eat-eshell-visual-command-mode)
+  :config (advice-add #'project-shell :override #'eat-project))
 
 (use-package eglot-booster
   :vc (:url "https://github.com/jdtsmith/eglot-booster")
   :after eglot
   :config (eglot-booster-mode))
 
+(defun elfeed-watch-youtube ()
+  "Play youtube video in elfeed entry"
+  (interactive)
+  (if (string= (buffer-name) "*elfeed-entry*")
+  (save-excursion
+    (goto-char (point-min))
+    (if (re-search-forward "^Link: \\(.*\\)$" nil t)
+        (let ((link (match-string 1)))
+          (when (string-match "youtube\\.com" link)
+            (emms-play-url link)) link)
+      (message "No link found.")
+      nil))
+  (message "Not in elfeed!")))
+
 (use-package elfeed
   :ensure t
-  :custom (elfeed-db-directory "~/.local/share/elfeed")
-  :bind ("C-x w" . elfeed))
+  :custom
+  (elfeed-db-directory "~/.local/share/elfeed")
+  (elfeed-search-filter "@1-months-ago")
+  (browse-url-browser-function 'eww-browse-url)
+  :bind
+  ("C-x w" . elfeed)
+  (:map elfeed-show-mode-map
+        ("C-c o" . elfeed-watch-youtube)))
 
 (use-package elfeed-org
   :ensure t
   :custom (rmh-elfeed-org-files (list "~/.local/share/elfeed.org"))
   :init (elfeed-org))
 
-(use-package elfeed-goodies
+(use-package elfeed-tube
   :ensure t
-  :config (elfeed-goodies/setup))
+  :after elfeed
+  :demand t
+  :config
+  (elfeed-tube-setup)
+  :bind (:map elfeed-show-mode-map
+         ("F" . elfeed-tube-fetch)
+         ([remap save-buffer] . elfeed-tube-save)
+         :map elfeed-search-mode-map
+         ("F" . elfeed-tube-fetch)
+         ([remap save-buffer] . elfeed-tube-save)))
+
+(use-package emms
+  :ensure t
+  :init
+  (require 'emms-setup)
+  (emms-all)
+  (emms-default-players)
+  (require 'emms-player-mpd)
+  :config
+  (emms-player-set emms-player-mpv
+                   'regex
+                   (rx (or (: "https://" (* nonl) "youtube.com" (* nonl))
+                           (+ (? (or "https://" "http://")) (* nonl)
+                              (regexp (eval (emms-player-simple-regexp "mp4" "mov" "wmv" "webm" "flv" "avi" "mkv"))))))))
 
 (use-package enlight
   :ensure t
@@ -103,12 +145,9 @@
             "\n"
             (enlight-menu
              '(("Actions"
-                ("Find file" find-file "f"))
-               ("Projects"
-	            ("Open projects" project-switch-project "p"))
-               ("Open config files"
-	            ("Sway config" (find-file "~/dots/.config/sway/README.org") "s")
-                ("Emacs config" (find-file "~/dots/.config/emacs/README.org") "e"))))
+                ("Find file" find-file "f")
+                ("Eshell" eshell "e")
+	            ("Open projects" project-switch-project "p"))))
             "\n"
             (propertize "Esperanto word of the Day" 'face 'highlight)
             "\n"
@@ -117,10 +156,49 @@
               (let ((lines (split-string (buffer-string) "\n" t)))
                 (nth (random (length lines)) lines))))))
 
+;; Eshell has a bug so this should do it
+(defun eshell-keys ()
+  (keymap-local-set "C-p" 'eshell-previous-matching-input-from-input)
+  (keymap-local-set "C-n" 'eshell-next-matching-input-from-input))
+
+(defun shortened-path (path max-len)
+  "Return a modified version of `path', replacing some components
+  with single characters starting from the left to try and get
+  the path down to `max-len'"
+  (let* ((components (split-string (abbreviate-file-name path) "/"))
+         (len (+ (1- (length components))
+              (cl-reduce '+ components :key 'length)))
+         (str ""))
+    (while (and (> len max-len)
+                (cdr components))
+      (setq str (concat str (if (= 0 (length (car components)))
+                                "/"
+                              (string (elt (car components) 0) ?/)))
+            len (- len (1- (length (car components))))
+            components (cdr components)))
+    (concat str (cl-reduce (lambda (a b) (concat a "/" b)) components))))
+
+(use-package eshell
+  :ensure nil
+  :init (require 'eshell)
+  :custom
+  (eshell-banner-message "")
+  (eshell-prompt-function
+  (lambda nil (concat "λ " (shortened-path (eshell/pwd) 40) (if (= (user-uid) 0) " # " " $ "))))
+  :hook (eshell-mode . eshell-keys))
+
+(use-package eshell-syntax-highlighting
+  :ensure t
+  :init (eshell-syntax-highlighting-global-mode))
+
 (use-package exec-path-from-shell
   :ensure t
   :init (exec-path-from-shell-initialize)
   :custom (exec-path-from-shell-variables '("ROSWELL_HOME" "GOPATH" "WORKON_HOME" "PATH")))
+
+(use-package god-mode
+  :ensure t
+  :bind ("<escape>" . god-local-mode))
 
 (use-package pyvenv :ensure t)
 (use-package web-mode :ensure t)
@@ -150,6 +228,21 @@
     :ensure t 
     :config (advice-add #'project-vc-dir :override #'magit)
     :custom epg-pinentry-mode 'loopback)
+
+(use-package mpc
+  :ensure nil
+  :bind (:map mpc-mode-map
+   ("M-p" . windmove-up)
+   ("M-n" . windmove-down)
+   ("M-b" . windmove-left)
+   ("M-f" . windmove-right)
+   ("C-<return>" . mpc-play-at-point)
+   ("<SPC>" . mpc-toggle-play)
+   ("s" . mpc-toggle-shuffle)
+   ("n" . next-line)
+   ("p" . previous-line)
+   ("f" . mpc-next)
+   ("b" . mpc-prev)))
 
 (use-package nerd-icons-completion 
     :ensure t 
@@ -194,3 +287,9 @@
     :ensure t 
     :after yasnippet 
     :config (yas-global-mode t))
+
+(defun watch-movie ()
+  "Select a movie to play"
+  (interactive)
+  (let ((movie (completing-read "Movie: " (cddr (directory-files "~/mov")))))
+    (emms-play-file (concat "~/mov/" movie))))

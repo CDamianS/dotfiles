@@ -23,11 +23,12 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(apheleia beacon catppuccin-theme coffee-mode corfu doom-modeline
-              dumb-jump eat eglot-booster elfeed-goodies elfeed-org
-              emmet-mode enlight exec-path-from-shell forge ligature
-              marginalia nerd-icons-completion nerd-icons-dired
-              org-auto-tangle org-modern pyvenv rainbow-delimiters sly
+   '(apheleia beacon catppuccin-theme coffee-mode doom-modeline dumb-jump
+              eat eglot-booster elfeed elfeed-org elfeed-tube
+              emmet-mode emms enlight eshell-syntax-highlighting
+              exec-path-from-shell forge god-mode ligature marginalia
+              nerd-icons-completion nerd-icons-dired org-auto-tangle
+              org-modern pdf-tools pyvenv rainbow-delimiters sly
               sudo-edit toc-org treesit-auto web-mode
               yasnippet-snippets))
  '(package-vc-selected-packages

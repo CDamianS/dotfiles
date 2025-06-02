@@ -10,7 +10,7 @@ chomp $conf;
 if ($conf eq "sway") {
 	`$editor ~/.config/sway/README.org`;
 } elsif ($conf eq "emacs") {
-    `$editor ~/.config/emacs/config.org`;    
+    `$editor ~/.config/emacs/README.org`;    
 } elsif ($conf eq "waybar") {
     `$editor ~/.config/waybar/config`;
 } elsif ($conf eq "dunst") {

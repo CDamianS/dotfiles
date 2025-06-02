@@ -1,5 +1,3 @@
-# Add deno completions to search path
-if [[ ":$FPATH:" != *":/home/damian/.config/zsh/completions:"* ]]; then export FPATH="/home/damian/.config/zsh/completions:$FPATH"; fi
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -68,7 +66,7 @@ export PATH=$PATH:$XDG_DATA_HOME/go/bin
 /_bun" ] && source "$BUN_INSTALL/_bun"
 
 # Zoxide
-eval "$(zoxide init zsh)"
+eval "$(zoxide init zsh --cmd cd)"
 
 
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.

@@ -1,18 +1,17 @@
 set $mod Mod4
 
-set $term foot
-set $eshell emacsclient -c -a 'emacs' --eval '(eat)'
 set $editor emacsclient -c
-set $browser icecat
-set $altbrowser brave-browser
+set $term foot
+set $backupterm $editor --eval '(eat)'
+set $browser firefox    
+set $altbrowser icecat
 set $lock ~/.config/sway/scripts/lockscreen
-set $files $editor --eval '(dirvish)'
-set $agenda emacsclient -c -a 'emacs' --eval '(find-file "~/Agenda/Agenda.org")'
-set $music $term cmus
+set $files $editor --eval '(dired "~/")'
+set $music $editor --eval '(mpc)'
 
 font pango:Arimo Nerd Font 14
 
-output * bg ~/.config/sway/catsby.png fill
+output * bg ~/.config/sway/catsky.png fill
 
 output eDP-1 {
     mode 1920x1080
@@ -60,7 +59,7 @@ client.placeholder       $overlay0 $base $text  $overlay0  $overlay0
 client.background        $base
 
 bindsym $mod+Return exec $term
-bindsym $mod+Shift+Return exec $eshell
+bindsym $mod+Shift+Return exec $backupterm
 
 bindsym $mod+Shift+e exec $editor
 bindsym $mod+Shift+w exec $browser
@@ -143,7 +142,8 @@ bindsym XF86MonBrightnessDown exec brightnessctl set 5%- && bash ~/.config/sway/
 bindsym XF86MonBrightnessUp exec brightnessctl set 5%+ && bash ~/.config/sway/scripts/brightness
 bindsym XF86Tools exec ~/.config/sway/scripts/utils/conf
 bindsym XF86Display exec mpv ~/mov/Scream\ \(1996\)/Scream\ \(1996\).mp4
-bindsym XF86Favorites exec ~/.config/sway/scripts/utils/moviepicker
+bindsym XF86Favorites exec ~/.local/bin/answers
+# bindsym XF86Favorites exec ~/.config/sway/scripts/utils/moviepicker
 
 # bindsym $mod+b splith
 # bindsym $mod+v splitv

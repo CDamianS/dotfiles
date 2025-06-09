@@ -59,9 +59,9 @@ window#waybar {
 }
 
 /* Latte theme */
-#clock {
-    margin-right: 4px;
-}
+/* #clock { */
+/*     margin-right: 4px; */
+/* } */
 
 /* #backlight { */
 /*     background-color: @magenta; */

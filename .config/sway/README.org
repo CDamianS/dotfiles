@@ -168,10 +168,10 @@ bindsym $mod+Shift+alt+y exec ytfzf -D -c youtube-subscriptions
 
 ** Scripts
 #+begin_src conf
-bindsym $mod+s exec ~/.config/sway/scripts/script-utils
-bindsym $mod+Shift+i exec ~/.config/sway/scripts/utils/bookmark
-bindsym $mod+Shift+b exec ~/.config/sway/scripts/utils/bookmarkthis
-bindsym $mod+Shift+p exec ~/.config/sway/scripts/utils/colorpicker
+bindsym $mod+s exec ~/.local/bin/script-utils
+bindsym $mod+Shift+i exec ~/.local/bin/utils/bookmark
+bindsym $mod+Shift+b exec ~/.local/bin/utils/bookmarkthis
+bindsym $mod+Shift+p exec ~/.local/bin/utils/colorpicker
 #+end_src
 
 ** Menus
@@ -282,8 +282,7 @@ bindsym XF86MonBrightnessDown exec brightnessctl set 5%- && bash ~/.config/sway/
 bindsym XF86MonBrightnessUp exec brightnessctl set 5%+ && bash ~/.config/sway/scripts/brightness
 bindsym XF86Tools exec ~/.config/sway/scripts/utils/conf
 bindsym XF86Display exec mpv ~/mov/Scream\ \(1996\)/Scream\ \(1996\).mp4
-bindsym XF86Favorites exec ~/.local/bin/answers
-# bindsym XF86Favorites exec ~/.config/sway/scripts/utils/moviepicker
+bindsym XF86Favorites exec ~/.config/sway/scripts/utils/moviepicker
 #+end_src
 
 ** Layout stuff

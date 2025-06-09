@@ -54,7 +54,7 @@ set $term foot
 set $backupterm $editor --eval '(eat)'
 set $browser firefox    
 set $altbrowser icecat
-set $lock ~/.config/sway/scripts/lockscreen
+set $lock ~/.local/bin/lockscreen
 set $files $editor --eval '(dired "~/")'
 set $music $editor --eval '(mpc)'
 #+end_src
@@ -177,7 +177,7 @@ bindsym $mod+Shift+p exec ~/.local/bin/utils/colorpicker
 ** Menus
 #+begin_src conf
 bindsym $mod+d exec bemenu-run -p  -i
-bindsym $mod+x exec ~/.config/sway/scripts/wlogout
+bindsym $mod+x exec ~/.local/bin/wlogout
 #+end_src
 
 * Screenshot
@@ -274,15 +274,15 @@ bindsym $mod+Shift+0 move container to workspace number 10
 * Others
 ** Power Keys
 #+begin_src conf
-bindsym XF86AudioRaiseVolume exec pamixer -i 5 && bash ~/.config/sway/scripts/volume
-bindsym XF86AudioLowerVolume exec pamixer -d 5 && bash ~/.config/sway/scripts/volume
-bindsym XF86AudioMute exec pamixer -t && bash ~/.config/sway/scripts/volume
+bindsym XF86AudioRaiseVolume exec pamixer -i 5
+bindsym XF86AudioLowerVolume exec pamixer -d 5
+bindsym XF86AudioMute exec pamixer -t
 bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
-bindsym XF86MonBrightnessDown exec brightnessctl set 5%- && bash ~/.config/sway/scripts/brightness
-bindsym XF86MonBrightnessUp exec brightnessctl set 5%+ && bash ~/.config/sway/scripts/brightness
-bindsym XF86Tools exec ~/.config/sway/scripts/utils/conf
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
+bindsym XF86MonBrightnessUp exec brightnessctl set 5%+
+bindsym XF86Tools exec ~/.local/bin/utils/conf
 bindsym XF86Display exec mpv ~/mov/Scream\ \(1996\)/Scream\ \(1996\).mp4
-bindsym XF86Favorites exec ~/.config/sway/scripts/utils/moviepicker
+bindsym XF86Favorites exec ~/.local/bin/utils/moviepicker
 #+end_src
 
 ** Layout stuff

@@ -27,11 +27,11 @@ elif [[ "$1" == '--hibernate' ]]; then
         exit
     fi
 elif [[ "$1" == '--lock' ]]; then
-    ~/.config/sway/scripts/lockscreen
+    ~/.local/bin/lockscreen
 elif [[ "$1" == '--suspend' ]]; then
     cdialog
     if [[ "$?" == 0 ]]; then
-        ~/.config/sway/scripts/lockscreen
+        ~/.local/bin/lockscreen
         systemctl suspend
     else
         exit

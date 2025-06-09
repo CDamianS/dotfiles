@@ -64,6 +64,7 @@ export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$XDG_DATA_HOME/go/bin
 [ -s "$BUN_INSTALL 
 /_bun" ] && source "$BUN_INSTALL/_bun"
+export PATH=$PATH:$HOME/.local/state/nix/profile/bin
 
 # Zoxide
 eval "$(zoxide init zsh --cmd cd)"

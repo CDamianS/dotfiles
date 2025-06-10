@@ -77,7 +77,7 @@ bindsym $mod+Shift+b exec ~/.local/bin/utils/bookmarkthis
 bindsym $mod+Shift+p exec ~/.local/bin/utils/colorpicker
 
 bindsym $mod+d exec bemenu-run -p  -i
-bindsym $mod+x exec ~/.local/bin/wlogout
+bindsym $mod+x exec ~/.local/bin/sway-logout
 
 # bindsym $mod+Shift+s exec grim --notify copy area
 bindsym $mod+Shift+s exec grim -g "$(slurp -d)" | wl-copy

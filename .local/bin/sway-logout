@@ -1,0 +1,18 @@
+#!/usr/bin/sh
+
+OPTION=$(echo "Lock\nLogout\nReboot\nShutdown" | bemenu -p "Option: ")
+
+[ -n "$OPTION" ] && case $OPTION in
+    "Lock" )
+        swaylock
+        ;;
+    "Logout" )
+        swaymsg exit
+        ;;
+    "Reboot" )
+        systemctl reboot
+        ;;
+    "Shutdown" )
+        systemctl poweroff
+        ;;
+esac

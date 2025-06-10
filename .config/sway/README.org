@@ -177,7 +177,7 @@ bindsym $mod+Shift+p exec ~/.local/bin/utils/colorpicker
 ** Menus
 #+begin_src conf
 bindsym $mod+d exec bemenu-run -p  -i
-bindsym $mod+x exec ~/.local/bin/wlogout
+bindsym $mod+x exec ~/.local/bin/sway-logout
 #+end_src
 
 * Screenshot

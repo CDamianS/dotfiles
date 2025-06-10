@@ -5,13 +5,12 @@ set $term foot
 set $backupterm $editor --eval '(eat)'
 set $browser firefox    
 set $altbrowser icecat
-set $lock ~/.local/bin/lockscreen
 set $files $editor --eval '(dired "~/")'
 set $music $editor --eval '(mpc)'
 
 font pango:Arimo Nerd Font 14
 
-output * bg ~/.config/sway/catsky.png fill
+output * bg ~/.config/sway/catflowers.png fill
 
 output eDP-1 {
     mode 1920x1080
@@ -33,23 +32,16 @@ set $down j
 set $up k
 set $right l
 
-smart_gaps off
-smart_borders off
+gaps inner 5    
 title_align center
 default_border pixel 1
 focus_follows_mouse yes
 title_align center
 default_floating_border pixel 1
 
-bindswitch --reload --locked lid:on exec $lock
+bindswitch --reload --locked lid:on exec swaylock
 
 include catppuccin-mocha
-
-# target                 title     bg    text   indicator  border
-# client.focused $focused_bgcolor $focused_bgcolor $focused_textcolor $focused_indicator $focused_bgcolor
-# client.focused_inactive $inactive_bgcolor $inactive_bgcolor $inactive_textcolor $inactive_indicator $inactive_bgcolor
-# client.unfocused $unfocused_bgcolor $unfocused_bgcolor $unfocused_textcolor $unfocused_indicator $unfocused_bgcolor
-# client.urgent $urgent_bgcolor $urgent_bgcolor $urgent_textcolor $urgent_indicator $urgent_bgcolor
 
 client.focused           $blue     $base $text  $rosewater $lavender
 client.focused_inactive  $overlay0 $base $text  $rosewater $overlay0
@@ -66,10 +58,6 @@ bindsym $mod+Shift+w exec $browser
 bindsym $mod+Shift+alt+w exec $altbrowser
 bindsym $mod+Shift+f exec $files
 bindsym $mod+Shift+m exec $music
-bindsym $mod+p exec tessen -d bemenu
-bindsym $mod+Shift+u exec udiskie-dmenu --dmenu
-bindsym $mod+Shift+y exec ytfzf -D
-bindsym $mod+Shift+alt+y exec ytfzf -D -c youtube-subscriptions
 
 bindsym $mod+s exec ~/.local/bin/script-utils
 bindsym $mod+Shift+i exec ~/.local/bin/utils/bookmark
@@ -79,17 +67,15 @@ bindsym $mod+Shift+p exec ~/.local/bin/utils/colorpicker
 bindsym $mod+d exec bemenu-run -p  -i
 bindsym $mod+x exec ~/.local/bin/sway-logout
 
-# bindsym $mod+Shift+s exec grim --notify copy area
-bindsym $mod+Shift+s exec grim -g "$(slurp -d)" | wl-copy
+bindsym $mod+Shift+s exec grimshot --notify copy area
+bindsym Print exec grimshot --notify save area
 
 bindsym Ctrl+Print exec notify-send Recording && wf-recorder -a -f ~/recording_$(date +"%Y-%m-%d_%H:%M:%S.mp4")
 bindsym Ctrl+Shift+Print exec wf-recorder -g "$$(slurp)" -a -f ~/recording_$(date +"%Y-%m-%d_%H:%M:%S.mp4")
 bindsym Ctrl+Shift+BackSpace exec killall -s SIGINT wf-recorder && notify-send Stopped Recording
 
 bindsym $mod+c kill
-
 floating_modifier $mod normal
-
 bindsym $mod+Shift+c reload
 
 bindsym $mod+$left focus left
@@ -144,8 +130,6 @@ bindsym XF86Tools exec ~/.local/bin/utils/conf
 bindsym XF86Display exec mpv ~/mov/Scream\ \(1996\)/Scream\ \(1996\).mp4
 bindsym XF86Favorites exec ~/.local/bin/utils/moviepicker
 
-# bindsym $mod+b splith
-# bindsym $mod+v splitv
 bindsym $mod+Shift+a sticky toggle
 
 bindsym $mod+b exec killall -SIGUSR1 waybar
@@ -178,20 +162,10 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-for_window [app_id="codium"] opacity set 0.9
-
-include /etc/sway/config.d/*
-
 exec_always ~/.local/bin/autotiling
-exec emacs --daemon
 
 bar { 
   swaybar_command waybar
   position bottom
   gaps 0
 }
-
-# blur enable
-# blur_radius 10
-# shadows enable
-# corner_radius 10

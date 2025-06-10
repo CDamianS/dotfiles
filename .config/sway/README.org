@@ -26,8 +26,6 @@
   - [[#pictures][Pictures]]
   - [[#video-thanks-wf-d][Video (thanks wf :D)]]
 - [[#actions][Actions]]
-  - [[#mouse-interactions][Mouse interactions]]
-  - [[#reload][Reload]]
 - [[#movement][Movement]]
   - [[#focus][Focus]]
   - [[#move-the-focused-windows][Move the focused windows]]
@@ -36,9 +34,6 @@
   - [[#power-keys][Power Keys]]
   - [[#layout-stuff][Layout stuff]]
   - [[#resizing-containers][Resizing containers:]]
-  - [[#opacity][Opacity]]
-  - [[#misc][Misc]]
-  - [[#fx][FX]]
 
 * Defaults
 ** Set mod key
@@ -54,7 +49,6 @@ set $term foot
 set $backupterm $editor --eval '(eat)'
 set $browser firefox    
 set $altbrowser icecat
-set $lock ~/.local/bin/lockscreen
 set $files $editor --eval '(dired "~/")'
 set $music $editor --eval '(mpc)'
 #+end_src
@@ -66,7 +60,7 @@ font pango:Arimo Nerd Font 14
 
 ** Background
 #+begin_src conf
-output * bg ~/.config/sway/catsky.png fill
+output * bg ~/.config/sway/catflowers.png fill
 #+end_src
 
 ** Scale
@@ -106,8 +100,7 @@ set $right l
 * Appereance
 ** Gaps and borders
 #+begin_src conf
-smart_gaps off
-smart_borders off
+gaps inner 5    
 title_align center
 default_border pixel 1
 focus_follows_mouse yes
@@ -117,7 +110,7 @@ default_floating_border pixel 1
 
 ** Lock screen on closed lid
 #+begin_src conf
-bindswitch --reload --locked lid:on exec $lock
+bindswitch --reload --locked lid:on exec swaylock
 #+end_src
 
 ** Theme
@@ -127,14 +120,6 @@ include catppuccin-mocha
 #+end_src
 
 ** Colors
-#+begin_src conf
-# target                 title     bg    text   indicator  border
-# client.focused $focused_bgcolor $focused_bgcolor $focused_textcolor $focused_indicator $focused_bgcolor
-# client.focused_inactive $inactive_bgcolor $inactive_bgcolor $inactive_textcolor $inactive_indicator $inactive_bgcolor
-# client.unfocused $unfocused_bgcolor $unfocused_bgcolor $unfocused_textcolor $unfocused_indicator $unfocused_bgcolor
-# client.urgent $urgent_bgcolor $urgent_bgcolor $urgent_textcolor $urgent_indicator $urgent_bgcolor
-#+end_src
-
 #+begin_src conf
 client.focused           $blue     $base $text  $rosewater $lavender
 client.focused_inactive  $overlay0 $base $text  $rosewater $overlay0
@@ -160,10 +145,6 @@ bindsym $mod+Shift+w exec $browser
 bindsym $mod+Shift+alt+w exec $altbrowser
 bindsym $mod+Shift+f exec $files
 bindsym $mod+Shift+m exec $music
-bindsym $mod+p exec tessen -d bemenu
-bindsym $mod+Shift+u exec udiskie-dmenu --dmenu
-bindsym $mod+Shift+y exec ytfzf -D
-bindsym $mod+Shift+alt+y exec ytfzf -D -c youtube-subscriptions
 #+end_src
 
 ** Scripts
@@ -183,8 +164,8 @@ bindsym $mod+x exec ~/.local/bin/sway-logout
 * Screenshot
 ** Pictures
 #+begin_src conf
-# bindsym $mod+Shift+s exec grim --notify copy area
-bindsym $mod+Shift+s exec grim -g "$(slurp -d)" | wl-copy
+bindsym $mod+Shift+s exec grimshot --notify copy area
+bindsym Print exec grimshot --notify save area    
 #+end_src
 
 ** Video (thanks wf :D)
@@ -195,16 +176,9 @@ bindsym Ctrl+Shift+BackSpace exec killall -s SIGINT wf-recorder && notify-send S
 #+end_src
 
 * Actions
-kill
 #+begin_src conf
 bindsym $mod+c kill
-#+end_src
-** Mouse interactions
-#+begin_src conf
 floating_modifier $mod normal
-#+end_src
-** Reload
-#+begin_src conf
 bindsym $mod+Shift+c reload
 #+end_src
 
@@ -224,6 +198,7 @@ bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 #+end_src
+
 ** Move the focused windows
 Move the focused window with the same, but add Shift
 *** Vim
@@ -287,8 +262,6 @@ bindsym XF86Favorites exec ~/.local/bin/utils/moviepicker
 
 ** Layout stuff
 #+begin_src conf
-# bindsym $mod+b splith
-# bindsym $mod+v splitv
 bindsym $mod+Shift+a sticky toggle
 #+end_src
 
@@ -343,21 +316,12 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 #+end_src
 
-** Opacity
-#+begin_src conf
-for_window [app_id="codium"] opacity set 0.9
-#+end_src
-
-** Misc
-*** Wayland
-#+begin_src conf
-include /etc/sway/config.d/*
-#+end_src
 *** Auto start
+TODO To be switched in debian 13 with autotiling package
 #+begin_src conf
 exec_always ~/.local/bin/autotiling
-exec emacs --daemon
 #+end_src
+
 *** Bar
 #+begin_src conf
 bar { 
@@ -365,12 +329,4 @@ bar {
   position bottom
   gaps 0
 }
-#+end_src
-
-** FX
-#+begin_src conf
-# blur enable
-# blur_radius 10
-# shadows enable
-# corner_radius 10
 #+end_src

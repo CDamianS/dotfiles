@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/sh
 MOVIE_DIR="$HOME/mov"
 MOVIE=$(ls "$MOVIE_DIR" | bemenu -l 10 -p Movie:)
 

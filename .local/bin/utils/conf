@@ -1,22 +1,22 @@
-#!/usr/bin/env perl
+#!/usr/bin/sh
 
-use warnings;
-use strict;
+CONF=`echo "sway\nemacs\nwaybar\ndunst\nfoot\nbookmarks" | bemenu -p "Config: "`;
+EDITOR="emacsclient -c -n"
 
-my $conf = `echo "sway\nemacs\nwaybar\ndunst\nkitty\nstarship\nbookmarks" | bemenu -p "Config: "`;
-my $editor = "emacsclient -c";
-chomp $conf;
-
-if ($conf eq "sway") {
-	`$editor ~/.config/sway/README.org`;
-} elsif ($conf eq "emacs") {
-    `$editor ~/.config/emacs/README.org`;    
-} elsif ($conf eq "waybar") {
-    `$editor ~/.config/waybar/config`;
-} elsif ($conf eq "dunst") {
-    `$editor ~/.config/dunst/dunstrc`;
-} elsif ($conf eq "bookmarks") {
-    `$editor ~/.local/share/bookmarks`;
-} else {
-    print "what";
-}
+case "$CONF" in
+    "sway")
+        $EDITOR ~/.config/sway/README.org 
+        ;;
+    "emacs")
+        $EDITOR ~/.config/emacs/README.org
+        ;;
+    "waybar")
+        $EDITOR ~/.config/waybar/config
+        ;;
+    "foot")
+        $EDITOR ~/.config/foot/foot.ini
+        ;;
+    "bookmarks")
+        $EDITOR ~/.local/share/bookmarks
+        ;;
+esac

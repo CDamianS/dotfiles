@@ -1,18 +1,11 @@
-#!/usr/bin/env perl
-use warnings;
-use strict;
-use Env qw($HOME);
-use File::Slurp;
+#!/usr/bin/sh
 
-my $bookmark = `wl-paste`;
-my $file = "$HOME/.local/share/bookmarks";
-my @bookmarks = read_file($file);
+BOOKMARK=$(wl-paste)
+BOOKMARK_FILE="$HOME/.local/share/bookmarks"
 
-if (! grep(/^$bookmark/, @bookmarks)) {
-    open(FH, ">>", $file) or die "can't open bookmarks";
-    print FH $bookmark;
-    closedir
-    system("notify-send 'Added bookmark!' '$bookmark'");
-} else {
-    system("notify-send 'Error!' 'already added'");
-}
+if ! grep -Fxq "$BOOKMARK" "$BOOKMARK_FILE"; then
+    echo "$BOOKMARK" >> "$BOOKMARK_FILE"
+    notify-send "Bookmark added."
+else
+    notify-send "Bookmark already exists."
+fi

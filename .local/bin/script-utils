@@ -1,27 +1,8 @@
-#!/usr/bin/env bash
+#!/usr/bin/sh
 
-directories=(
-    "$HOME/.local/bin/"
-)
+DIRECTORY="$HOME/.local/bin/utils"
+SCRIPTS=`ls $DIRECTORY`
+SELECTION=`echo "$SCRIPTS" | bemenu`
 
-scripts=()
-for dir in "${directories[@]}"; do
-    if [ -d "$dir" ]; then
-        while IFS= read -r -d '' file; do
-            scripts+=("$(basename "$file")")
-        done < <(find "$dir" -maxdepth 1 -type f -print0)
-    fi
-done
+[ -e $DIRECTORY/$SElECTION ] && sh $HOME/.local/bin/utils/$SELECTION
 
-selected_script=$(printf "%s\n" "${scripts[@]}" | bemenu -p "Script: ")
-
-for dir in "${directories[@]}"; do
-    full_path=$(find "$dir" -maxdepth 1 -type f -name "$selected_script")
-    if [ -n "$full_path" ]; then
-        break
-    fi
-done
-
-if [ -n "$full_path" ] && [ -f "$full_path" ]; then
-    perl "$full_path"
-fi

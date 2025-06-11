@@ -1,60 +1,53 @@
-    {
-      "layer": "bottom",
-      "position": "top",
-      "bar_id": "bar-0",
-      "ipc": "true",
-      "gtk-layer-shell": true,
-      "height": 2,
-
-      "modules-left": [
+{
+    "layer": "bottom",
+    "position": "top",
+    "bar_id": "bar-0",
+    "ipc": "true",
+    "gtk-layer-shell": true,
+    "height": 2,    
+    "modules-left": [
         "sway/workspaces",
         "custom/playerctl",
-      ],
-
-      "modules-center": [
-
-      ],
-
-      "modules-right": [
+    ],
+    "modules-center": [ 
+    ],  
+    "modules-right": [
         "pulseaudio",
         "backlight",
         "battery",
         "network",
         "clock",
-      ],
-
-      "clock": {
+    ],
+    "clock": {
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         "format": "{:%b %d | %H:%M}",
-      },
-
-      "sway/window": {
+    },
+    "sway/window": {
         "max-length": 50,
-      },
-
-      "sway/workspaces": {
-        "all-outputs": true,
-        "disable-scroll": true,
-        "format": "{icon}",
-        "format-icons": {
+    },  
+    "sway/workspaces": {
+    "all-outputs": true,
+    "disable-scroll": true,
+    "format": "{icon}",
+    "format-icons": {
         "1": "",
         "2": "",
         "3": "󰈹",
         "4": "󰼄",
         "5": "󱧌",
         "6": "󰖦",
-        },
-        "persistent_workspaces": {
-        "1": [],
-        "2": [],
-        "3": [],
-        "4": [],
+    },
+    "persistent_workspaces": {
+            "1": [],
+            "2": [],
+            "3": [],
+            "4": [],
         },
         "disable-scroll": true,
         "disable-markup": true,
-      },
+    },
 
-      "backlight": {
+    "backlight": {
         "interval": 2,
         "align": 0,
         "rotate": 0,
@@ -63,7 +56,7 @@
         "on-scroll-up": "brightnessctl set 5%-",
         "on-scroll-down": "brightnessctl set 5%+",
         "smooth-scrolling-threshold": 1,
-      },
+    },
 
       "battery": {
         "interval": 60,
@@ -74,7 +67,7 @@
         "states": {
             "warning": 20,
             "critical": 10
-        },
+    },
         "format": "{icon}{capacity}%",
         "format-charging": "󰂅 {capacity}%",
         "format-plugged": "󰂄 {capacity}%",
@@ -83,9 +76,9 @@
         "format-icons": ["󰁺 ", "󰁻 ", "󰁼 ", "󰁽 ", "󰁾 ", "󰁿 ", "󰂀 ", "󰂁 ", "󰂂 ", "󰁹 "],
         "format-time": "{H}h {M}min",
         "tooltip": true,
-      },
+    },
 
-      "pulseaudio": {
+    "pulseaudio": {
         "format": "{icon} {volume}%",
         "tooltip": false,
         "format-muted": "Muted",
@@ -94,30 +87,28 @@
         },
         "on-click": "pamixer -t",
         "scroll-step": 5,
-      },
-
-      "network": {
+    },
+    "network": {
         "format": "󰤨 Connected",
         "format-disconnected": "󰤨 no internet!",
         "tooltip-format": "{essid}"
-      },
+    },
+    "memory": {
+        "interval": 10,
+        "format": "󰍛 {used:0.1f}G",
+    },
 
-      "memory": {
-            "interval": 10,
-            "format": "󰍛 {used:0.1f}G",
-      },
-
-      "custom/playerctl": {
-          "exec": "$HOME/.config/waybar/waybar-player",
-          "interval": 1,
-          "format": "{}",
-          "tooltip": true,
-          "max-length": 40,
-          "on-click": "playerctl play-pause",
-          "on-click-middle": "playerctl previous",
-          "on-click-right": "playerctl next",
-          "on-scroll-up": "playerctl position 05+",
-          "on-scroll-down": "playerctl position 05-",
-          "smooth-scrolling-threshold": 1,
-      },
-    }
+    "custom/playerctl": {
+        "exec": "$HOME/.config/waybar/waybar-player",
+        "interval": 1,
+        "format": "{}",
+        "tooltip": true,
+        "max-length": 40,
+        "on-click": "playerctl play-pause",
+        "on-click-middle": "playerctl previous",
+        "on-click-right": "playerctl next",
+        "on-scroll-up": "playerctl position 05+",
+        "on-scroll-down": "playerctl position 05-",
+        "smooth-scrolling-threshold": 1,
+    },
+}

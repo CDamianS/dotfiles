@@ -1,0 +1,6 @@
+#!/usr/bin/sh
+
+CHOICE=`echo "english → esperanto\nesperanto → english"| bemenu`
+
+[ "$CHOICE" = "english → esperanto" ] && notify-send "$(grep "$(awk -F ' = ' '{ print $1 }' ~/.local/share/esperanto | bemenu)" ~/.local/share/esperanto | head -n 1 | awk -F ' = ' '{ print $2 }')"
+[ "$CHOICE" = "esperanto → english" ] && notify-send "$(grep "$(awk -F ' = ' '{ print $2 }' ~/.local/share/esperanto | bemenu)" ~/.local/share/esperanto | head -n 1 | awk -F ' = ' '{ print $1 }')"

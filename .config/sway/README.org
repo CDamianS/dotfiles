@@ -317,9 +317,13 @@ bindsym $mod+r mode "resize"
 #+end_src
 
 *** Auto start
-TODO To be switched in debian 13 with autotiling package
+TODO To be switched in debian 13 with autotiling package, and remove gtk bug workaround
 #+begin_src conf
 exec_always ~/.local/bin/autotiling
+exec {
+    systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
+    hash dbus-update-activation-environment 2>/dev/null && dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+}    
 #+end_src
 
 *** Bar

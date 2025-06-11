@@ -1,4 +1,5 @@
 [global]
+timeout = 2    
 monitor = 0
 follow = mouse
 width = 300
@@ -74,4 +75,4 @@ ignore_dbusclose = true
     background = "#f38ba8cc"
     foreground = "#1e1e2ecc"
     frame_color = "#eba0accc"
-    timeout = 0
+    timeout = 2

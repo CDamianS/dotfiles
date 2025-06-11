@@ -1,2 +1,0 @@
-#+title: Waybar config
-#+author: Damian Suarez

@@ -126,10 +126,12 @@
   :ensure t
   :init
   (require 'emms-setup)
+  (require 'emms-player-mpv)
   (emms-all)
   (emms-default-players)
-  (require 'emms-player-mpd)
   :config
+  (add-to-list 'emms-info-functions 'emms-info-mpd)
+  (add-to-list 'emms-player-list 'emms-player-mpv)
   (emms-player-set emms-player-mpv
                    'regex
                    (rx (or (: "https://" (* nonl) "youtube.com" (* nonl))
@@ -193,8 +195,7 @@
 
 (use-package exec-path-from-shell
   :ensure t
-  :init (exec-path-from-shell-initialize)
-  :custom (exec-path-from-shell-variables '("ROSWELL_HOME" "GOPATH" "WORKON_HOME" "PATH")))
+  :init (exec-path-from-shell-initialize))
 
 (use-package god-mode
   :ensure t
@@ -218,11 +219,6 @@
                             "<~~" "<~" "<~>" "~~" "~~>" "~>" "~-" "-~" "~@" "[||]" "|]" "[|" "|}" "{|" "[<" ">]" "|>" "<|" "||>" "<||"
                             "|||>" "<|||" "<|>" "..." ".." ".=" "..<" ".?" "::" ":::" ":=" "::=" ":?" ":?>" "//" "///" "/*" "*/" "/="
                             "//=" "/==" "@_" "__" "???" "<:<" ";;;")) (global-ligature-mode t))
-
-(use-package forge 
-    :ensure t 
-    :after magit 
-    :custom (auth-sources '("~/.local/share/authinfo")))
 
 (use-package magit 
     :ensure t 

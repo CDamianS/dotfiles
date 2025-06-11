@@ -36,8 +36,8 @@
 (add-hook 'dired-mode-hook 'dired-hide-details-mode)
 
 (add-to-list 'default-frame-alist '(font . "JetBrainsMono Nerd Font 14"))
-(add-to-list 'default-frame-alist '(alpha-background . 90))
-(set-frame-parameter nil 'alpha-background 90)
+;; (add-to-list 'default-frame-alist '(alpha-background . 100))
+;; (set-frame-parameter nil 'alpha-background 100)
 (fset 'yes-or-no-p 'y-or-n-p)
 (require 'org-tempo)
 
@@ -130,7 +130,6 @@
   (emms-all)
   (emms-default-players)
   :config
-  (add-to-list 'emms-info-functions 'emms-info-mpd)
   (add-to-list 'emms-player-list 'emms-player-mpv)
   (emms-player-set emms-player-mpv
                    'regex

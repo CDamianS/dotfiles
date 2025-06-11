@@ -9,25 +9,20 @@
 
 window#waybar {
     background-color: @base;
-    color: @foreground;
+    color: @text;
 }
 
 #window {
-    /* margin: 2px 0; */
-    background: @background;
+    background: @base;
 }
 
 #mode {
     margin: 2px 0;
-    /* padding: 0 4px; */
-    /* margin-left: 0; */
-    background: @background;
+    background: @base;
 }
 
 #workspaces button {
     min-width: 20px;
-    /* border-radius: 5px; */
-    /* margin: 6px 2px; */
     padding: 0px 2px;
     color: @blue;
 }
@@ -43,51 +38,47 @@ window#waybar {
 
 #workspaces button:hover {
     background: @teal;
-    color: @background;
+    color: @base;
 }
 
-#pulseaudio,
-#disk,
-#backlight,
-#battery,
-#network,
-#custom-playerctl {
-    color: @foreground;
+#pulseaudio {
+    color: @pink;
+    border-bottom: 2px solid @pink;
     margin: 0px 4px;
     padding: 0px 1px;
-    /* border-radius: 5px; */
 }
 
-/* Latte theme */
-/* #clock { */
-/*     margin-right: 4px; */
-/* } */
+#backlight {
+    color: @teal;
+    border-bottom: 2px solid @teal;
+    margin: 0px 4px;
+    padding: 0px 1px;
+}
 
-/* #backlight { */
-/*     background-color: @magenta; */
-/* } */
+#battery {
+    color: @red;
+    border-bottom: 2px solid @red;
+    margin: 0px 4px;
+    padding: 0px 1px;
+}
 
-/* #pulseaudio { */
-/*     background-color: @red; */
-/* } */
+#network {
+    color: @mauve;
+    border-bottom: 2px solid @mauve;
+    margin: 0px 4px;
+    padding: 0px 1px;
+}
 
-/* #battery { */
-/*     background-color: @yellow; */
-/* } */
+#custom-playerctl {
+    color: @green;
+    border-bottom: 2px solid @green;
+    margin: 0px 4px;
+    padding: 0px 1px;
+}
 
-/* #network { */
-/*     background-color: @green; */
-/* } */
-
-/* #memory { */
-/*     background-color: @violet; */
-/* } */
-
-/* #custom-playerctl { */
-/*     background-color: @teal; */
-/* } */
-
-/* #workspaces { */
-/*     background-color: @base; */
-/*     /\* border-radius: 5px; *\/ */
-/* } */
+#clock {
+    color: @yellow;
+    border-bottom: 2px solid @yellow;
+    margin: 0px 4px;
+    padding: 0px 1px;
+}

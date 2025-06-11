@@ -22,6 +22,8 @@ export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
 export WORKON_HOME="$XDG_DATA_HOME/virtualenvs"
 export PATH="$HOME/.local/share/perl/bin${PATH:+:${PATH}}"
 
+# Defaults
+export EDITOR="emacsclient -c"
 
 # Imagine using electron in 2025
 export ELECTRON_OZONE_PLATFORM_HINT=auto

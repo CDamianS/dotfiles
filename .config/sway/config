@@ -1,7 +1,7 @@
 set $mod Mod4
 
 set $editor emacsclient -c
-set $term foot
+set $term kitty
 set $backupterm $editor --eval '(eat)'
 set $browser firefox    
 set $altbrowser icecat
@@ -10,7 +10,7 @@ set $music $editor --eval '(mpc)'
 
 font pango:Arimo Nerd Font 14
 
-output * bg ~/.config/sway/catflowers.png fill
+output * bg ~/.config/sway/catberpunk.png fill
 
 output eDP-1 {
     mode 1920x1080

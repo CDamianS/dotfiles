@@ -49,9 +49,10 @@ compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-$ZSH_VERSION
 # Alias
 alias remacs="systemctl --user restart emacs"
 alias imv="imv-wayland"
+alias rss="emacsclient -t --eval '(elfeed)'"
 # TODO change to eza on debian 13
-alias ls="exa"
-alias l="exa --icons -lah"
+alias ls="eza"
+alias l="eza --icons -lah"
 alias em="emacsclient -t"
 
 #PATH

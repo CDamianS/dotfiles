@@ -27,8 +27,8 @@
   - [[#god-mode][God mode]]
   - [[#languages][Languages]]
   - [[#ligatures][Ligatures]]
+  - [[#mail][Mail]]
   - [[#magit][Magit]]
-  - [[#mpc][MPC]]
   - [[#nerd-icons][Nerd Icons]]
   - [[#org-mode-packages][Org Mode Packages]]
   - [[#rainbow-delimiters][Rainbow Delimiters]]
@@ -63,6 +63,8 @@
 (scroll-bar-mode -1)
 (pixel-scroll-precision-mode 1)
 (pixel-scroll-mode 1)
+
+(add-to-list 'term-file-aliases '("foot" . "xterm"))
 #+end_src
 
 * Vars
@@ -97,8 +99,6 @@
 * Extra configs
 #+begin_src emacs-lisp    
 (add-to-list 'default-frame-alist '(font . "JetBrainsMono Nerd Font 14"))
-;; (add-to-list 'default-frame-alist '(alpha-background . 100))
-;; (set-frame-parameter nil 'alpha-background 100)
 (fset 'yes-or-no-p 'y-or-n-p)
 (require 'org-tempo)
 #+end_src
@@ -226,13 +226,23 @@ Installed different
   (require 'emms-player-mpv)
   (emms-all)
   (emms-default-players)
+  (emms-mpris-enable)
+  (emms-mode-line-disable)
   :config
-  (add-to-list 'emms-player-list 'emms-player-mpv)
   (emms-player-set emms-player-mpv
                    'regex
                    (rx (or (: "https://" (* nonl) "youtube.com" (* nonl))
                            (+ (? (or "https://" "http://")) (* nonl)
-                              (regexp (eval (emms-player-simple-regexp "mp4" "mov" "wmv" "webm" "flv" "avi" "mkv"))))))))
+                              (regexp (eval (emms-player-simple-regexp "mp4" "mov" "wmv" "webm" "flv" "avi" "mkv")))))))
+  (add-to-list 'emms-player-list 'emms-player-mpv)
+  :custom
+  (emms-source-file-default-directory "~/mus/")
+  :bind
+  ("C-c m a" . emms-play-directory)  
+  ("C-c m s" . emms-stop)
+  ("C-c m n" . emms-next)
+  ("C-c m p" . emms-previous)
+  ("C-c m SPC" . emms-pause))
 #+end_src
 
 ** Enlight
@@ -340,30 +350,20 @@ Not today RSI!
                             "//=" "/==" "@_" "__" "???" "<:<" ";;;")) (global-ligature-mode t))
 #+end_src
 
+** Mail
+#+begin_src emacs-lisp
+(setq user-mail-address "DamianS78@proton.me"
+      send-mail-function 'sendmail-send-it
+      message-send-mail-function 'sendmail-send-it
+      sendmail-program (executable-find "msmtp"))
+#+end_src
+
 ** Magit
 #+begin_src emacs-lisp    
 (use-package magit 
     :ensure t 
     :config (advice-add #'project-vc-dir :override #'magit)
     :custom epg-pinentry-mode 'loopback)
-#+end_src
-
-** MPC
-#+begin_src emacs-lisp
-(use-package mpc
-  :ensure nil
-  :bind (:map mpc-mode-map
-   ("M-p" . windmove-up)
-   ("M-n" . windmove-down)
-   ("M-b" . windmove-left)
-   ("M-f" . windmove-right)
-   ("C-<return>" . mpc-play-at-point)
-   ("<SPC>" . mpc-toggle-play)
-   ("s" . mpc-toggle-shuffle)
-   ("n" . next-line)
-   ("p" . previous-line)
-   ("f" . mpc-next)
-   ("b" . mpc-prev)))
 #+end_src
 
 ** Nerd Icons

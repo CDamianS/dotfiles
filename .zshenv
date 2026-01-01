@@ -20,7 +20,6 @@ export TEXMFVAR=$XDG_CACHE_HOME/texlive/texmf-var
 export TEXMFCONFIG=$XDG_CONFIG_HOME/texlive/texmf-config
 export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
 export WORKON_HOME="$XDG_DATA_HOME/virtualenvs"
-export PATH="$HOME/.local/share/perl/bin${PATH:+:${PATH}}"
 
 # Defaults
 export EDITOR="emacsclient -c"

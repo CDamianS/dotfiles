@@ -15,6 +15,8 @@
 (pixel-scroll-precision-mode 1)
 (pixel-scroll-mode 1)
 
+(add-to-list 'term-file-aliases '("foot" . "xterm"))
+
 (setq electric-pair-inhibit-predicate `(lambda (c) (if (char-equal c ?\<) t (,electric-pair-inhibit-predicate c)))
       create-lockfiles nil
       backup-directory-alist `(("." . ,(concat user-emacs-directory "backups")))
@@ -36,8 +38,6 @@
 (add-hook 'dired-mode-hook 'dired-hide-details-mode)
 
 (add-to-list 'default-frame-alist '(font . "JetBrainsMono Nerd Font 14"))
-;; (add-to-list 'default-frame-alist '(alpha-background . 100))
-;; (set-frame-parameter nil 'alpha-background 100)
 (fset 'yes-or-no-p 'y-or-n-p)
 (require 'org-tempo)
 
@@ -129,13 +129,23 @@
   (require 'emms-player-mpv)
   (emms-all)
   (emms-default-players)
+  (emms-mpris-enable)
+  (emms-mode-line-disable)
   :config
-  (add-to-list 'emms-player-list 'emms-player-mpv)
   (emms-player-set emms-player-mpv
                    'regex
                    (rx (or (: "https://" (* nonl) "youtube.com" (* nonl))
                            (+ (? (or "https://" "http://")) (* nonl)
-                              (regexp (eval (emms-player-simple-regexp "mp4" "mov" "wmv" "webm" "flv" "avi" "mkv"))))))))
+                              (regexp (eval (emms-player-simple-regexp "mp4" "mov" "wmv" "webm" "flv" "avi" "mkv")))))))
+  (add-to-list 'emms-player-list 'emms-player-mpv)
+  :custom
+  (emms-source-file-default-directory "~/mus/")
+  :bind
+  ("C-c m a" . emms-play-directory)  
+  ("C-c m s" . emms-stop)
+  ("C-c m n" . emms-next)
+  ("C-c m p" . emms-previous)
+  ("C-c m SPC" . emms-pause))
 
 (use-package enlight
   :ensure t
@@ -219,25 +229,15 @@
                             "|||>" "<|||" "<|>" "..." ".." ".=" "..<" ".?" "::" ":::" ":=" "::=" ":?" ":?>" "//" "///" "/*" "*/" "/="
                             "//=" "/==" "@_" "__" "???" "<:<" ";;;")) (global-ligature-mode t))
 
+(setq user-mail-address "DamianS78@proton.me"
+      send-mail-function 'sendmail-send-it
+      message-send-mail-function 'sendmail-send-it
+      sendmail-program (executable-find "msmtp"))
+
 (use-package magit 
     :ensure t 
     :config (advice-add #'project-vc-dir :override #'magit)
     :custom epg-pinentry-mode 'loopback)
-
-(use-package mpc
-  :ensure nil
-  :bind (:map mpc-mode-map
-   ("M-p" . windmove-up)
-   ("M-n" . windmove-down)
-   ("M-b" . windmove-left)
-   ("M-f" . windmove-right)
-   ("C-<return>" . mpc-play-at-point)
-   ("<SPC>" . mpc-toggle-play)
-   ("s" . mpc-toggle-shuffle)
-   ("n" . next-line)
-   ("p" . previous-line)
-   ("f" . mpc-next)
-   ("b" . mpc-prev)))
 
 (use-package nerd-icons-completion 
     :ensure t 

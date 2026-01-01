@@ -28,7 +28,7 @@
               eglot-booster elfeed-org elfeed-tube emmet-mode emms
               enlight eshell-syntax-highlighting exec-path-from-shell
               god-mode ligature magit marginalia nerd-icons-completion
-              nerd-icons-dired org-auto-tangle org-modern pyvenv
+              nerd-icons-dired nov org-auto-tangle org-modern pyvenv
               rainbow-delimiters sly sudo-edit toc-org treesit-auto
               web-mode yasnippet-snippets))
  '(package-vc-selected-packages
